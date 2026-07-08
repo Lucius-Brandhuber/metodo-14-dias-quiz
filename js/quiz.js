@@ -7,7 +7,7 @@
   "use strict";
 
   // Para onde o quiz leva ao final (página de vendas — ainda vazia).
-  var PV_URL = "../pv/";
+  var PV_URL = "pv/";
 
   /* ---------- helper de imagem de conteúdo ---------- */
   function img(src, alt, cls) {
