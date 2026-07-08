@@ -12,12 +12,12 @@
   --line: #E4E7EC;           /* bordas dos cards */
   --line-soft: #EEF1F5;
   --bg: #FFFFFF;
-  --radius: 14px;
+  --radius: 12px;
   --shadow: 0 2px 10px rgba(16, 21, 31, .06);
   --shadow-hover: 0 6px 18px rgba(16, 96, 240, .14);
-  --maxw: 600px;
-  --pad: 20px;
-  --header-h: 128px;
+  --maxw: 440px;
+  --pad: 18px;
+  --header-h: 110px;
 }
 
 * { box-sizing: border-box; }
@@ -43,20 +43,20 @@ html, body {
 .quiz-header {
   width: 100%;
   max-width: var(--maxw);
-  padding: 22px var(--pad) 10px;
+  padding: 16px var(--pad) 8px;
   text-align: center;
 }
 
 .brand-logo {
-  height: 40px;
+  height: 30px;
   width: auto;
   object-fit: contain;
-  margin: 0 auto 18px;
+  margin: 0 auto 12px;
   display: block;
 }
 
 .progress {
-  height: 8px;
+  height: 6px;
   width: 100%;
   background: var(--line-soft);
   border-radius: 999px;
@@ -75,7 +75,7 @@ html, body {
   width: 100%;
   max-width: var(--maxw);
   flex: 1;
-  padding: 26px var(--pad) 40px;
+  padding: 20px var(--pad) 30px;
   display: flex;
   flex-direction: column;
 }
@@ -83,15 +83,15 @@ html, body {
 .quiz-footer {
   width: 100%;
   max-width: var(--maxw);
-  padding: 18px var(--pad) 26px;
+  padding: 14px var(--pad) 20px;
   text-align: center;
-  font-size: 12px;
+  font-size: 11px;
   color: var(--muted);
 }
 
 /* ---------- Tipografia das etapas ---------- */
 .step-title {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 800;
   line-height: 1.25;
   text-align: center;
@@ -99,18 +99,18 @@ html, body {
 }
 .step-title .hl { color: var(--brand); }
 .step-sub {
-  font-size: 15px;
+  font-size: 14px;
   color: var(--muted);
   text-align: center;
-  margin: 0 0 22px;
+  margin: 0 0 18px;
 }
 .step-title + .step-sub { margin-top: 2px; }
 .step-lead { /* blocos de conteúdo com parágrafos */
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   line-height: 1.5;
   text-align: center;
-  margin: 0 0 18px;
+  margin: 0 0 16px;
 }
 .step-note {
   font-size: 14px;
@@ -122,19 +122,19 @@ html, body {
 .step-note b { color: var(--ink); }
 
 /* ---------- Cards de opção (ÚNICO estilo p/ todas as telas) ---------- */
-.options { display: flex; flex-direction: column; gap: 12px; margin-top: 6px; }
+.options { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
 
 .option {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   width: 100%;
   text-align: left;
   background: #fff;
   border: 1.5px solid var(--line);
   border-radius: var(--radius);
-  padding: 18px 18px;
-  font-size: 16px;
+  padding: 13px 15px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--ink);
   cursor: pointer;
@@ -150,7 +150,7 @@ html, body {
 /* marcador (círculo radio / quadrado checkbox) */
 .option__mark {
   flex: 0 0 auto;
-  width: 24px; height: 24px;
+  width: 21px; height: 21px;
   border: 2px solid #CBD2DC;
   border-radius: 50%;
   display: grid; place-items: center;
@@ -236,11 +236,11 @@ html, body {
   margin: 10px 0 6px;
 }
 .scale__btn {
-  width: 56px; height: 56px;
+  width: 46px; height: 46px;
   border: 1.5px solid var(--line);
-  border-radius: 12px;
+  border-radius: 10px;
   background: #fff;
-  font-size: 18px; font-weight: 700; color: var(--ink);
+  font-size: 16px; font-weight: 700; color: var(--ink);
   cursor: pointer;
   box-shadow: var(--shadow);
   transition: border-color .15s, background .15s, color .15s, box-shadow .15s;
@@ -249,8 +249,8 @@ html, body {
 .scale__btn.is-selected { background: var(--brand); border-color: var(--brand); color: #fff; }
 .scale__ends {
   display: flex; justify-content: space-between;
-  width: 100%; max-width: 328px; margin: 6px auto 0;
-  padding: 0 6px;
+  width: 100%; max-width: 270px; margin: 6px auto 0;
+  padding: 0 5px;
   font-size: 12px; color: var(--muted);
 }
 
@@ -262,10 +262,10 @@ html, body {
   background: var(--brand);
   color: #fff;
   font-family: inherit;
-  font-size: 17px;
+  font-size: 15.5px;
   font-weight: 700;
-  padding: 18px;
-  margin-top: 26px;
+  padding: 15px;
+  margin-top: 20px;
   cursor: pointer;
   transition: background .15s, opacity .15s;
 }
@@ -349,6 +349,6 @@ html, body {
 
 /* ---------- Responsivo ---------- */
 @media (min-width: 640px) {
-  .step-title { font-size: 26px; }
-  .brand-logo { height: 44px; }
+  .step-title { font-size: 21px; }
+  .brand-logo { height: 32px; }
 }
