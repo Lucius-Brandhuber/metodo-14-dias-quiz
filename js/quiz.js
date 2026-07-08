@@ -1,5 +1,5 @@
 /* ===========================================================
-   Método Rasga Xana — Quiz engine (27 etapas)
+   Método 14 Dias — Quiz engine (27 etapas)
    Réplica fiel do funil de referência, design unificado.
    Placeholders (.img-ph) marcam onde entram as imagens do usuário.
    =========================================================== */
@@ -36,7 +36,7 @@
     {
       type: "content",
       title: '<span class="hl">Mais de 1 milhão de homens brasileiros..</span>',
-      sub: "escolheram o Método Rasga Xana em 2026",
+      sub: "escolheram o Método 14 Dias em 2026",
       blocks: [img("imagens/img5.webp", "Evolução dos exercícios — DIA 1 / DIA 14 / DIA 24")],
       note: "Nós ajudamos mais de <b>150.000 homens</b> a melhorar seu desempenho sexual.",
       btn: "Continuar"
@@ -126,7 +126,7 @@
     // 12 — Desejo: gráfico (até 7x)
     {
       type: "chart",
-      title: 'O programa do Método Rasga Xana fortalece os músculos do assoalho pélvico e pode aumentar o tempo médio de relação em <span class="hl">até 7 vezes</span>',
+      title: 'O programa do Método 14 Dias fortalece os músculos do assoalho pélvico e pode aumentar o tempo médio de relação em <span class="hl">até 7 vezes</span>',
       note: "Esse método ajuda os homens a elevarem sua vida íntima a um novo nível, mesmo com o passar dos anos.",
       btn: "Continuar"
     },
@@ -182,8 +182,8 @@
     // 19 — Prova: tabela comparativa + depoimento
     {
       type: "comparison",
-      title: "84% dos homens melhoraram significativamente sua função erétil seguindo o plano de exercícios do Método Rasga Xana.",
-      cols: ["Sozinho", "Método Rasga Xana"],
+      title: "84% dos homens melhoraram significativamente sua função erétil seguindo o plano de exercícios do Método 14 Dias.",
+      cols: ["Sozinho", "Método 14 Dias"],
       rows: [
         { label: "Durar mais na cama", a: true, b: true },
         { label: "Melhorar a ereção", a: false, b: true },
@@ -246,7 +246,7 @@
     // 26 — Autoridade
     {
       type: "content",
-      title: "O plano do Método Rasga Xana foi desenvolvido por médicos de todo o mundo certificados em função erétil",
+      title: "O plano do Método 14 Dias foi desenvolvido por médicos de todo o mundo certificados em função erétil",
       sub: "Sua jornada é baseada em décadas de pesquisa",
       blocks: [img("imagens/img14.webp", "Cambridge · Harvard · Oxford", "content-img--logos")],
       btn: "Continuar"
