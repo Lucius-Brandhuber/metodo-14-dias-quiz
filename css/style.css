@@ -1,0 +1,347 @@
+/* ===========================================================
+   Método 14 Dias — Quiz (design system unificado)
+   Marca: RASGA XANA / azul + preto
+   =========================================================== */
+:root {
+  --brand: #1060F0;          /* azul do logo */
+  --brand-dark: #0A47B8;
+  --brand-soft: #E7EFFF;     /* fundo do estado selecionado */
+  --brand-disabled: #9DBBF7; /* botão desabilitado */
+  --ink: #10151F;            /* texto principal */
+  --muted: #6B7280;          /* subtítulos / rótulos */
+  --line: #E4E7EC;           /* bordas dos cards */
+  --line-soft: #EEF1F5;
+  --bg: #FFFFFF;
+  --radius: 14px;
+  --shadow: 0 2px 10px rgba(16, 21, 31, .06);
+  --shadow-hover: 0 6px 18px rgba(16, 96, 240, .14);
+  --maxw: 600px;
+  --pad: 20px;
+  --header-h: 128px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Nunito", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Shell / layout consistente ---------- */
+.quiz-shell {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.quiz-header {
+  width: 100%;
+  max-width: var(--maxw);
+  padding: 22px var(--pad) 10px;
+  text-align: center;
+}
+
+.brand-logo {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  margin: 0 auto 18px;
+  display: block;
+}
+
+.progress {
+  height: 8px;
+  width: 100%;
+  background: var(--line-soft);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.progress__bar {
+  height: 100%;
+  width: 0%;
+  background: var(--brand);
+  border-radius: 999px;
+  transition: width .35s ease;
+}
+
+/* Conteúdo com alinhamento vertical CONSISTENTE (sem vazio irregular) */
+.quiz-main {
+  width: 100%;
+  max-width: var(--maxw);
+  flex: 1;
+  padding: 26px var(--pad) 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.quiz-footer {
+  width: 100%;
+  max-width: var(--maxw);
+  padding: 18px var(--pad) 26px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ---------- Tipografia das etapas ---------- */
+.step-title {
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.25;
+  text-align: center;
+  margin: 4px 0 6px;
+}
+.step-title .hl { color: var(--brand); }
+.step-sub {
+  font-size: 15px;
+  color: var(--muted);
+  text-align: center;
+  margin: 0 0 22px;
+}
+.step-title + .step-sub { margin-top: 2px; }
+.step-lead { /* blocos de conteúdo com parágrafos */
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
+  margin: 0 0 18px;
+}
+.step-note {
+  font-size: 14px;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.5;
+  margin: 16px 0 0;
+}
+.step-note b { color: var(--ink); }
+
+/* ---------- Cards de opção (ÚNICO estilo p/ todas as telas) ---------- */
+.options { display: flex; flex-direction: column; gap: 12px; margin-top: 6px; }
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  text-align: left;
+  background: #fff;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px 18px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: border-color .15s, box-shadow .15s, background .15s;
+}
+.option:hover { border-color: var(--brand); box-shadow: var(--shadow-hover); }
+.option.is-selected {
+  border-color: var(--brand);
+  background: var(--brand-soft);
+}
+
+/* marcador (círculo radio / quadrado checkbox) */
+.option__mark {
+  flex: 0 0 auto;
+  width: 24px; height: 24px;
+  border: 2px solid #CBD2DC;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  transition: border-color .15s, background .15s;
+}
+.option--check .option__mark { border-radius: 7px; }
+.option.is-selected .option__mark { border-color: var(--brand); background: var(--brand); }
+.option.is-selected .option__mark::after {
+  content: "";
+  width: 9px; height: 9px; border-radius: 50%;
+  background: #fff;
+}
+.option--check.is-selected .option__mark::after {
+  width: 6px; height: 11px; border-radius: 0; background: transparent;
+  border: solid #fff; border-width: 0 2.5px 2.5px 0; transform: rotate(45deg) translateY(-1px);
+}
+
+/* thumbnail dentro da opção (tipo de corpo) */
+.option__thumb {
+  flex: 0 0 auto;
+  width: 54px; height: 54px;
+  border-radius: 10px;
+  object-fit: cover;
+  object-position: top center;
+  background: #F3F5F8;
+}
+
+/* ---------- Cards de imagem grande (idade) ---------- */
+.age-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 8px;
+}
+.age-card {
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+  background: #fff;
+  box-shadow: var(--shadow);
+  transition: border-color .15s, box-shadow .15s, transform .1s;
+}
+.age-card:hover { border-color: var(--brand); box-shadow: var(--shadow-hover); }
+.age-card:active { transform: scale(.99); }
+.age-card__img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  object-position: top center;
+  background: #F3F5F8;
+}
+.age-card__label {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--brand);
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 12px 14px;
+}
+.age-card__label::before {
+  content: "›";
+  display: grid; place-items: center;
+  width: 22px; height: 22px;
+  border: 1.5px solid rgba(255,255,255,.7);
+  border-radius: 50%;
+  font-size: 14px; line-height: 1;
+}
+
+/* ---------- Escala 1–5 ---------- */
+.scale {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 10px 0 6px;
+}
+.scale__btn {
+  width: 56px; height: 56px;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  font-size: 18px; font-weight: 700; color: var(--ink);
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: border-color .15s, background .15s, color .15s, box-shadow .15s;
+}
+.scale__btn:hover { border-color: var(--brand); box-shadow: var(--shadow-hover); }
+.scale__btn.is-selected { background: var(--brand); border-color: var(--brand); color: #fff; }
+.scale__ends {
+  display: flex; justify-content: space-between;
+  width: 100%; max-width: 328px; margin: 6px auto 0;
+  padding: 0 6px;
+  font-size: 12px; color: var(--muted);
+}
+
+/* ---------- Botão Continuar / CTA ---------- */
+.btn {
+  width: 100%;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--brand);
+  color: #fff;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 700;
+  padding: 18px;
+  margin-top: 26px;
+  cursor: pointer;
+  transition: background .15s, opacity .15s;
+}
+.btn:hover { background: var(--brand-dark); }
+.btn:disabled { background: var(--brand-disabled); cursor: not-allowed; }
+
+/* ---------- Placeholder de imagem (usuário sobe depois) ---------- */
+.img-ph {
+  width: 100%;
+  border: 2px dashed var(--brand);
+  border-radius: var(--radius);
+  background: repeating-linear-gradient(45deg, #F5F8FF, #F5F8FF 12px, #EDF3FF 12px, #EDF3FF 24px);
+  color: var(--brand-dark);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+  text-align: center;
+  padding: 26px 18px;
+  min-height: 150px;
+  margin: 4px 0 6px;
+}
+.img-ph__icon { font-size: 26px; }
+.img-ph__label { font-weight: 800; font-size: 14px; }
+.img-ph__hint { font-size: 12px; color: var(--muted); max-width: 260px; }
+.img-ph--sm { min-height: 90px; padding: 14px; }
+
+/* ---------- Blocos de conteúdo específicos ---------- */
+.content-block { display: flex; flex-direction: column; }
+
+/* imagens de conteúdo (notícias, ilustrações, logos) */
+.content-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  margin: 4px 0 6px;
+}
+
+/* tabela comparativa (etapa 19) */
+.cmp {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 6px 0 4px;
+  font-size: 15px;
+  font-weight: 700;
+}
+.cmp td {
+  border: 1.5px solid var(--line);
+  padding: 16px 12px;
+  text-align: center;
+  vertical-align: middle;
+}
+.cmp td:first-child { text-align: left; }
+.cmp .yes { color: #16A34A; font-size: 22px; }
+.cmp .no  { color: #DC2626; font-size: 22px; }
+.cmp thead td { background: var(--brand-soft); font-size: 13px; color: var(--brand-dark); }
+
+/* depoimento */
+.review {
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-top: 18px;
+  box-shadow: var(--shadow);
+}
+.review__stars { color: #F5B301; letter-spacing: 2px; font-size: 14px; }
+.review__name { font-weight: 800; margin: 4px 0 6px; }
+.review__text { font-size: 14px; color: #374151; line-height: 1.5; font-weight: 600; }
+
+/* gráfico de evolução (etapa 12) */
+.chart-wrap { margin: 6px 0; }
+.chart-wrap svg { width: 100%; height: auto; display: block; }
+
+/* loading final (etapa 27) */
+.loader-wrap { margin-top: 20px; }
+.loader-row { display: flex; justify-content: space-between; font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+.loader-track { height: 12px; background: var(--line-soft); border-radius: 999px; overflow: hidden; }
+.loader-fill { height: 100%; width: 0%; background: var(--brand); border-radius: 999px; transition: width .3s linear; }
+
+/* util */
+.center-block { text-align: center; }
+.spacer { flex: 1; }
+
+/* ---------- Responsivo ---------- */
+@media (min-width: 640px) {
+  .step-title { font-size: 26px; }
+  .brand-logo { height: 44px; }
+}
