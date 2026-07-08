@@ -448,16 +448,18 @@
       '<line x1="40" y1="60" x2="520" y2="60"/><line x1="40" y1="130" x2="520" y2="130"/>' +
       '<line x1="40" y1="200" x2="520" y2="200"/><line x1="40" y1="255" x2="520" y2="255"/>' +
       "</g>" +
-      // área + curva
-      '<path d="M40 250 Q200 235 280 175 T520 60 L520 255 L40 255 Z" fill="url(#areaGrad)"/>' +
-      '<path d="M40 250 Q200 235 280 175 T520 60" fill="none" stroke="url(#lineGrad)" stroke-width="5" stroke-linecap="round"/>' +
-      // pontos
-      '<circle cx="40" cy="250" r="7" fill="#EF4444" stroke="#fff" stroke-width="3"/>' +
-      '<circle cx="280" cy="175" r="8" fill="#F59E0B" stroke="#fff" stroke-width="3"/>' +
-      '<circle cx="520" cy="60" r="8" fill="#22C55E" stroke="#fff" stroke-width="3"/>' +
+      // área + curva (animadas)
+      '<path class="ch-area" d="M40 250 Q200 235 280 175 T520 60 L520 255 L40 255 Z" fill="url(#areaGrad)"/>' +
+      '<path class="ch-line" pathLength="1" d="M40 250 Q200 235 280 175 T520 60" fill="none" stroke="url(#lineGrad)" stroke-width="5" stroke-linecap="round"/>' +
+      // pontos (surgem em sequência)
+      '<circle class="ch-dot" style="animation-delay:.15s" cx="40" cy="250" r="7" fill="#EF4444" stroke="#fff" stroke-width="3"/>' +
+      '<circle class="ch-dot" style="animation-delay:.8s" cx="280" cy="175" r="8" fill="#F59E0B" stroke="#fff" stroke-width="3"/>' +
+      '<circle class="ch-dot" style="animation-delay:1.45s" cx="520" cy="60" r="8" fill="#22C55E" stroke="#fff" stroke-width="3"/>' +
       // rótulo "Você"
+      '<g class="ch-label" style="animation-delay:1s">' +
       '<rect x="252" y="140" width="56" height="24" rx="6" fill="#F59E0B"/>' +
       '<text x="280" y="157" text-anchor="middle" font-size="13" font-weight="800" fill="#fff">Você</text>' +
+      "</g>" +
       // eixo x
       '<text x="40" y="278" text-anchor="middle" font-size="12" fill="#6B7280">Ontem</text>' +
       '<text x="280" y="278" text-anchor="middle" font-size="12" fill="#6B7280">Hoje</text>' +
