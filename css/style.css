@@ -48,7 +48,7 @@ html, body {
 }
 
 .brand-logo {
-  height: 30px;
+  height: 54px;
   width: auto;
   object-fit: contain;
   margin: 0 auto 12px;
@@ -386,5 +386,5 @@ html, body {
 /* ---------- Responsivo ---------- */
 @media (min-width: 640px) {
   .step-title { font-size: 21px; }
-  .brand-logo { height: 32px; }
+  .brand-logo { height: 60px; }
 }

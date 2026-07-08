@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1060F0">
+<title>Método 14 Dias — Rasga Xana</title>
+<meta name="description" content="O treino de 5 minutos por dia que devolve controle e firmeza em 14 dias — em casa, sem remédio e sem efeito colateral.">
+
+<!-- [PIXEL] Meta Pixel / Utmify entram aqui quando o funil tiver tracking (não copiar os IDs do Reconexão Materna) -->
+
+<link rel="icon" type="image/webp" href="../imagens/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#eef4fd; --paper:#ffffff; --ink:#10151f; --muted:#6b7280;
+    --brand:#1060f0; --brand-d:#0a47b8; --brand-soft:#e7efff; --hi:#bcd4ff;
+    --green:#18b26b; --green-d:#0e9257; --line:#e4e7ec;
+    --shadow:0 14px 40px rgba(16,96,240,.13);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Nunito',system-ui,sans-serif;font-size:17px;line-height:1.6;overflow-x:hidden}
+  .wrap{max-width:640px;margin:0 auto;padding:0 20px}
+  h1,h2,h3{font-family:'Nunito',sans-serif;font-weight:900;line-height:1.18;letter-spacing:-.01em}
+  h1{font-size:31px;margin:0 0 16px}
+  h2{font-size:26px;margin:0 0 14px}
+  h3{font-size:20px;margin:0 0 8px}
+  p{margin:0 0 14px}
+  b,strong{font-weight:800}
+  .hi{background:linear-gradient(180deg,transparent 55%,var(--hi) 55%);padding:0 3px}
+  .brand{color:var(--brand)}
+  .center{text-align:center}
+  img{max-width:100%;display:block}
+  section{padding:44px 0}
+  .paper{background:var(--paper)}
+
+  /* header */
+  header{background:var(--paper);border-bottom:1px solid var(--line);padding:12px 0;position:relative;z-index:5}
+  header img{height:30px;margin:0 auto}
+
+  /* eyebrow bridge (emenda com o quiz) */
+  .bridge{background:var(--brand-soft);color:var(--brand-d);text-align:center;font-weight:800;font-size:14px;padding:12px 20px}
+
+  /* hero */
+  .hero{padding-top:34px}
+  .hero h1{text-align:center}
+  .lead{text-align:center;color:var(--muted);font-size:18px;max-width:540px;margin:0 auto 22px}
+  .heroimg{border-radius:20px;box-shadow:var(--shadow);margin:0 auto 24px;max-width:460px;width:100%}
+
+  /* buttons */
+  .cta{display:block;width:100%;max-width:520px;margin:20px auto;background:linear-gradient(180deg,#20c274,#0e9257);color:#fff;text-align:center;
+       text-decoration:none;font-family:'Nunito';font-weight:900;font-size:19px;padding:20px 22px;border-radius:16px;border:0;cursor:pointer;
+       box-shadow:0 12px 26px rgba(14,146,87,.32);line-height:1.25;animation:pulse 2.2s infinite}
+  .cta small{display:block;font-weight:700;font-size:13.5px;opacity:.92;margin-top:4px}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.022)}}
+  .cta.alt{background:linear-gradient(180deg,#2f7bff,#0a47b8);box-shadow:0 12px 26px rgba(16,96,240,.3);animation:none}
+  .anchor-btn{display:inline-block;background:none;border:2px solid var(--brand);color:var(--brand-d);font-weight:800;font-size:15px;
+       padding:12px 22px;border-radius:999px;text-decoration:none;margin:6px auto 0}
+
+  /* identificação */
+  .idcard{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--shadow)}
+  .problem{font-family:'Nunito';font-weight:900;font-size:22px;color:var(--brand-d);text-align:center;margin:18px 0;line-height:1.3}
+  ul.pain{list-style:none;padding:0;margin:16px 0}
+  ul.pain li{padding:9px 0 9px 34px;position:relative;border-bottom:1px dashed var(--line)}
+  ul.pain li:last-child{border:0}
+  ul.pain li:before{content:"✕";position:absolute;left:8px;top:11px;color:var(--brand);font-size:15px;font-weight:900;line-height:1}
+
+  /* mecanismo (3 pilares) */
+  .layers{display:flex;flex-direction:column;gap:14px;margin:22px 0}
+  .layer{display:flex;gap:16px;align-items:flex-start;background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--brand);
+         border-radius:14px;padding:18px}
+  .layer .num{flex:none;width:44px;height:44px;border-radius:50%;background:var(--brand-soft);color:var(--brand-d);
+         font-family:'Nunito';font-weight:900;font-size:20px;display:flex;align-items:center;justify-content:center}
+  .layer h3{margin-bottom:4px}
+  .layer p{margin:0;color:var(--muted);font-size:15.5px}
+  .mechimg{border-radius:16px;box-shadow:var(--shadow);margin:6px auto 0;max-width:420px;width:100%}
+
+  /* anti-pílula callout */
+  .warn{display:flex;gap:16px;align-items:center;background:#fff5f5;border:1px solid #f6d6d6;border-left:5px solid #e5484d;border-radius:14px;padding:16px 18px;margin:8px 0}
+  .warn img{width:96px;flex:none;border-radius:10px}
+  .warn p{margin:0;font-size:15px;color:#7a2c2f}
+  .warn b{color:#c0322f}
+
+  /* entregáveis */
+  .receive{background:var(--brand-soft);border-radius:20px;padding:26px 22px}
+  .receive h2{text-align:center;color:var(--brand-d)}
+  ul.deliver{list-style:none;padding:0;margin:18px 0 0}
+  ul.deliver li{background:var(--paper);border-radius:12px;padding:14px 16px 14px 46px;position:relative;margin-bottom:10px;box-shadow:0 4px 12px rgba(16,96,240,.06)}
+  ul.deliver li:before{content:"✓";position:absolute;left:16px;top:14px;width:22px;height:22px;background:var(--green);color:#fff;border-radius:50%;
+         font-size:13px;font-weight:900;display:flex;align-items:center;justify-content:center;line-height:1}
+  ul.deliver b{color:var(--ink)}
+
+  /* origem/autoridade */
+  .authimg{border-radius:16px;box-shadow:var(--shadow);margin:0 auto 20px;max-width:380px;width:100%;background:#fff;padding:10px}
+
+  /* prova */
+  .proofnum{text-align:center;font-family:'Nunito';font-weight:900;font-size:40px;color:var(--brand);line-height:1}
+  .proofnum small{display:block;font-family:'Nunito';font-size:15px;font-weight:700;color:var(--muted);margin-top:2px}
+  .grid{display:grid;grid-template-columns:1fr;gap:14px;margin:20px 0}
+  .grid img{border-radius:14px;box-shadow:0 8px 20px rgba(0,0,0,.08);width:100%}
+
+  /* depoimentos (balão de WhatsApp) */
+  .wachat{background:#e5ddd3;border-radius:18px;padding:16px 12px 14px;margin-bottom:14px;box-shadow:0 6px 16px rgba(16,96,240,.06)}
+  .wabub{position:relative;background:#fff;border-radius:10px;border-top-left-radius:2px;padding:9px 12px 20px;margin:0 34px 9px 8px;box-shadow:0 1px .5px rgba(0,0,0,.13);font-size:14.5px;line-height:1.45;color:#111b21}
+  .wabub:before{content:"";position:absolute;top:0;left:-8px;width:8px;height:13px;background:#fff;clip-path:polygon(100% 0,0 0,100% 100%)}
+  .wabub .wahead{font-weight:800;font-size:13px;color:var(--brand);margin-bottom:3px}
+  .wabub .watime{position:absolute;right:10px;bottom:6px;font-size:11px;color:#667781}
+  .wabub .watime b{color:#53bdeb;font-weight:400;letter-spacing:-2px;margin-left:3px}
+  .placeholder-note{font-size:12.5px;color:#9aa3af;font-style:italic;text-align:center;margin-top:6px}
+
+  /* objeções */
+  .obj{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:12px}
+  .obj .q{font-weight:800;color:var(--brand-d);margin-bottom:4px}
+  .obj .a{color:var(--ink)}
+
+  /* oferta */
+  .offer{background:linear-gradient(180deg,#fff,#eef4fd);border:2px solid var(--brand);border-radius:24px;padding:28px 22px;box-shadow:var(--shadow)}
+  .offer .badge{display:inline-block;background:var(--brand);color:#fff;font-weight:800;font-size:13px;padding:6px 16px;border-radius:999px;margin-bottom:10px}
+  .cover{width:220px;max-width:70%;aspect-ratio:3/4;border-radius:16px;border:1px solid var(--line);margin:6px auto 4px;
+         background:linear-gradient(150deg,#1060f0,#0a2a6b);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:16px;box-shadow:var(--shadow)}
+  .cover .k{font-size:12px;font-weight:800;letter-spacing:2px;opacity:.85}
+  .cover .t{font-size:26px;font-weight:900;line-height:1.1}
+  .cover .s{font-size:13px;font-weight:700;opacity:.9}
+  .stack{list-style:none;padding:0;margin:18px 0}
+  .stack li{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px dashed var(--line);font-size:15.5px}
+  .stack li b{font-weight:800}
+  .stack .val{color:var(--muted);white-space:nowrap;font-weight:700}
+  .stack .total{border:0;font-weight:900;font-size:17px;padding-top:14px}
+  .price{text-align:center;margin:14px 0}
+  .price .from{color:var(--muted);text-decoration:line-through;font-size:17px}
+  .price .now{font-family:'Nunito';font-weight:900;font-size:52px;color:var(--brand-d);line-height:1}
+  .price .now small{font-size:22px;vertical-align:top;margin-right:2px}
+  .price .cond{color:var(--muted);font-size:14px}
+
+  /* garantia */
+  .guarantee{background:var(--paper);border:2px dashed var(--brand);border-radius:20px;padding:24px;text-align:center}
+  .seal{width:96px;height:96px;border-radius:50%;background:var(--brand-soft);color:var(--brand-d);margin:0 auto 14px;
+        display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Nunito';font-weight:900;line-height:1;border:3px solid var(--brand)}
+  .seal .big{font-size:30px}
+  .seal .sm{font-size:11px;letter-spacing:1px;margin-top:2px}
+
+  /* faq */
+  details{background:var(--paper);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden}
+  summary{padding:16px 44px 16px 18px;font-weight:800;cursor:pointer;position:relative;list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary:after{content:"+";position:absolute;right:18px;top:14px;font-size:22px;color:var(--brand);font-weight:400}
+  details[open] summary:after{content:"–"}
+  details .body{padding:0 18px 16px;color:var(--muted)}
+
+  footer{background:#0c1220;color:#9aa6bd;font-size:12.5px;line-height:1.6;padding:30px 0 44px;text-align:center}
+  .disc{max-width:560px;margin:0 auto}
+  footer b{color:#fff}
+  @media(max-width:520px){ h1{font-size:27px} .price .now{font-size:46px} section{padding:36px 0} }
+</style>
+</head>
+<body>
+
+<header><img src="../imagens/logo.webp" alt="Método Rasga Xana"></header>
+
+<div class="bridge">✔ Você acabou de descobrir o que está travando o seu desempenho. Agora veja como destravar em 14 dias.</div>
+
+<!-- ============ BLOCO 1 — HEADLINE + PROMESSA ============ -->
+<section class="hero">
+  <div class="wrap">
+    <h1 class="center">Não é remédio. Não é bomba. É um treino de <span class="hi">5 minutos por dia</span> que devolve o controle e a firmeza — em 14 dias.</h1>
+    <p class="lead">O <b>Método 14 Dias</b> é um passo a passo de exercícios para o assoalho pélvico masculino — os mesmos músculos que decidem quanto você dura e quão firme você fica. Feito em casa, no seu tempo, sem remédio e sem efeito colateral.</p>
+    <img class="heroimg" src="../imagens/img5.webp" alt="Evolução do desempenho — Dia 1, Dia 14, Dia 24">
+    <a class="cta" href="#oferta">QUERO DESTRAVAR MEU DESEMPENHO<small>acesso imediato · garantia de 30 dias</small></a>
+    <p class="center" style="font-size:13px;color:var(--muted);margin-top:-6px">Programa de exercícios e bem-estar — não substitui avaliação médica.</p>
+  </div>
+</section>
+
+<!-- ============ BLOCO 2 — IDENTIFICAÇÃO + PROBLEMA ============ -->
+<section class="paper">
+  <div class="wrap">
+    <div class="idcard">
+      <p class="center" style="font-weight:800;font-size:19px">Se você se reconhece aqui, <span class="brand">não é só você</span>:</p>
+      <ul class="pain">
+        <li>Termina bem antes do que gostaria — e fica aquela sensação de frustração (na sua e na dela).</li>
+        <li>Bate o medo de não subir, ou de subir e “murchar” no meio da hora.</li>
+        <li>Já pensou no azulzinho, mas trava com o medo do efeito colateral.</li>
+        <li>Começou a evitar a hora H pra não passar vergonha — e isso mexe com a sua cabeça.</li>
+        <li>Sente que perdeu a firmeza e o controle que você tinha alguns anos atrás.</li>
+      </ul>
+      <div class="problem">O problema não é idade nem falta de vontade.<br>É o músculo do assoalho pélvico enfraquecido — e ninguém nunca te ensinou a treinar ele.</div>
+      <p class="center">A boa notícia: músculo se treina. Na ordem certa, 5 minutos por dia, sem tomar nada.</p>
+      <div class="center"><a class="anchor-btn" href="#oferta">Já quero começar agora →</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BLOCO 3 — MECANISMO ============ -->
+<section>
+  <div class="wrap">
+    <h2 class="center">O músculo que <span class="brand">comanda tudo</span></h2>
+    <p class="center lead">Quanto você dura e quão firme você fica não depende de sorte nem de remédio. Depende da força do seu assoalho pélvico — e ele responde ao treino, na ordem certa, em três frentes:</p>
+    <div class="layers">
+      <div class="layer"><div class="num">1</div><div><h3>Controle</h3><p>Você aprende a segurar o reflexo da ejaculação e passa a decidir a hora — em vez de terminar antes de querer.</p></div></div>
+      <div class="layer"><div class="num">2</div><div><h3>Firmeza</h3><p>É esse músculo que prende o sangue dentro do pênis. Forte, ele deixa a ereção mais dura e mais duradoura.</p></div></div>
+      <div class="layer"><div class="num">3</div><div><h3>Potência</h3><p>Mais sensibilidade, orgasmo mais intenso e a confiança de quem sabe que vai dar conta.</p></div></div>
+    </div>
+    <img class="mechimg" src="../imagens/img12.webp" alt="Anatomia do assoalho pélvico — músculo bulbocavernoso">
+    <p class="center" style="font-weight:800;margin-top:16px">É o mesmo princípio que a fisioterapia pélvica usa. A diferença é que aqui virou um plano simples de 14 dias, pra fazer sozinho em casa.</p>
+  </div>
+</section>
+
+<!-- ============ ANTI-PÍLULA ============ -->
+<section class="paper">
+  <div class="wrap">
+    <div class="warn">
+      <img src="../imagens/img11.webp" alt="Alerta sobre riscos de comprimidos de efeito rápido">
+      <p><b>Remédio não treina nada.</b> A pílula força uma solução temporária e cobra caro do coração. O Método 14 Dias vai na raiz: fortalece o músculo pra você não depender de nada.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ O QUE VOCÊ RECEBE ============ -->
+<section>
+  <div class="wrap">
+    <div class="receive">
+      <h2>O que você recebe hoje</h2>
+      <ul class="deliver">
+        <li><b>Método 14 Dias — o plano completo.</b> O autoteste do seu nível + os exercícios do assoalho pélvico, semana a semana, e a rotina de 5 minutos por dia.</li>
+        <li><b>Bônus 1 — Protocolo Primeira Noite.</b> 3 gatilhos pra durar bem mais já na próxima vez, enquanto o treino de fundo faz efeito.</li>
+        <li><b>Bônus 2 — Reset Masculino em 7 Dias.</b> Como cortar o que está sabotando sua libido e sua firmeza (o excesso que dessensibiliza) e recuperar o tesão natural.</li>
+        <li><b>Bônus 3 — O Mapa do Prazer Dela.</b> O que fazer na cama pra ela querer mais — e você virar assunto.</li>
+      </ul>
+    </div>
+    <a class="cta" href="#oferta">QUERO O MÉTODO COMPLETO<small>método + 3 bônus · acesso imediato</small></a>
+  </div>
+</section>
+
+<!-- ============ ORIGEM / AUTORIDADE ============ -->
+<section class="paper">
+  <div class="wrap">
+    <img class="authimg" src="../imagens/img14.webp" alt="Pesquisa de universidades de referência">
+    <h2 class="center">De onde vem o Método</h2>
+    <p class="center lead">O Método 14 Dias organiza, num plano simples, exercícios do assoalho pélvico masculino que já são estudados e usados na fisioterapia da saúde sexual do homem há décadas.</p>
+    <p class="center">Nada de fórmula mágica: é treino de músculo, com progressão pensada pra caber na sua rotina e funcionar na sua idade — do jeito que o seu resultado no teste indicou.</p>
+  </div>
+</section>
+
+<!-- ============ BLOCO 4 — PROVA ============ -->
+<section>
+  <div class="wrap">
+    <div class="proofnum">+150 mil<small>homens já começaram esse treino em casa</small></div>
+    <div class="grid">
+      <img src="../imagens/img10.webp" alt="Evolução da força do músculo — dia 1, 7, 14, 28">
+    </div>
+    <p class="center" style="font-size:13px;color:var(--muted);font-style:italic">84% dos homens relataram melhora significativa seguindo o plano. Cada corpo é único — resultados variam.</p>
+
+    <h3 class="center" style="margin-top:26px">O que os caras estão dizendo</h3>
+    <div class="wachat">
+      <div class="wabub"><div class="wahead">Mário A.</div>Pouco se fala de como é bom fazer exercício assim. A confiança fica lá em cima, faz uma baita diferença no dia a dia. E dá pra fazer em casa, faço em 10 minutos num canto do quarto. Minha mulher fica maluca com a firmeza.<span class="watime">21:04<b>✓✓</b></span></div>
+    </div>
+    <div class="wachat">
+      <div class="wabub"><div class="wahead">Rafael M.</div>Cara, eu já tinha até desistido e pensado em recorrer a comprimido. Em duas semanas fazendo os exercícios certinho eu voltei a ter o controle que tinha aos 25. Valeu cada minuto.<span class="watime">08:47<b>✓✓</b></span></div>
+    </div>
+    <div class="wachat">
+      <div class="wabub"><div class="wahead">Diego P.</div>O que mais mudou foi a firmeza e a segurança. Não fico mais com aquele medo na cabeça antes de começar. Recomendei pra dois amigos já.<span class="watime">19:30<b>✓✓</b></span></div>
+    </div>
+    <p class="placeholder-note">[SUBSTITUIR por depoimentos REAIS de clientes antes de rodar tráfego — estes são exemplos.]</p>
+  </div>
+</section>
+
+<!-- ============ OBJEÇÕES ============ -->
+<section class="paper">
+  <div class="wrap">
+    <h2 class="center">Você pode estar pensando…</h2>
+    <div class="obj"><div class="q">“Já tentei remédio e não resolveu de verdade.”</div><div class="a">Remédio mascara, não treina. Ele age enquanto está no sangue e depois some. Aqui você fortalece o músculo — o resultado passa a ser seu, sem depender de comprimido.</div></div>
+    <div class="obj"><div class="q">“Não tenho tempo pra mais nada.”</div><div class="a">São 5 minutos por dia, em casa, sem equipamento. Dá pra encaixar antes de dormir sem ninguém perceber.</div></div>
+    <div class="obj"><div class="q">“Tenho vergonha, isso é constrangedor.”</div><div class="a">É 100% discreto. Material digital, acesso privado no seu celular e cobrança discreta no cartão. Ninguém precisa saber.</div></div>
+    <div class="obj"><div class="q">“Sou mais velho / faz tempo que caiu meu desempenho.”</div><div class="a">Músculo responde a treino em qualquer idade. O plano se ajusta ao seu nível — inclusive pra quem está começando do zero.</div></div>
+  </div>
+</section>
+
+<!-- ============ BLOCO 5 — OFERTA ============ -->
+<section id="oferta">
+  <div class="wrap">
+    <div class="offer">
+      <div class="center"><span class="badge">OFERTA DE LANÇAMENTO</span></div>
+      <h2 class="center">Comece hoje seu treino de 14 dias</h2>
+      <!-- [IMAGEM: trocar por um mockup real da capa do produto quando tiver] -->
+      <div class="cover"><span class="k">MÉTODO</span><span class="t">14 DIAS</span><span class="s">Rasga Xana</span></div>
+      <ul class="stack">
+        <li><span><b>Método 14 Dias</b> — o plano completo</span><span class="val">R$97</span></li>
+        <li><span><b>Bônus 1</b> — Protocolo Primeira Noite</span><span class="val">R$47</span></li>
+        <li><span><b>Bônus 2</b> — Reset Masculino em 7 Dias</span><span class="val">R$47</span></li>
+        <li><span><b>Bônus 3</b> — O Mapa do Prazer Dela</span><span class="val">R$37</span></li>
+        <li class="total"><span>Valor total</span><span class="val">R$228</span></li>
+      </ul>
+      <div class="price">
+        <div class="from">De R$228</div>
+        <div class="now"><small>R$</small>27,90</div>
+        <div class="cond">à vista · ou parcelado no cartão</div>
+      </div>
+      <!-- [CHECKOUT] trocar o href="#" pelo link real do checkout (Kiwify/Hotmart/Cakto) -->
+      <a class="cta" href="#">QUERO COMEÇAR AGORA<small>acesso imediato · 100% online e discreto</small></a>
+      <p class="center" style="font-size:13px;color:var(--muted)">Pagamento seguro · Acesso liberado na hora, no seu celular.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BLOCO 6 — GARANTIA + FECHAMENTO + FAQ ============ -->
+<section class="paper">
+  <div class="wrap">
+    <div class="guarantee">
+      <div class="seal"><span class="big">30</span><span class="sm">DIAS</span></div>
+      <h3>Garantia incondicional de 30 dias</h3>
+      <p style="margin:0">Entre, faça o autoteste e comece o treino. Se em 30 dias você achar que não é pra você, é só pedir o reembolso — devolvemos 100%, sem perguntas. O risco é todo nosso.</p>
+    </div>
+
+    <h2 class="center" style="margin-top:34px">Você merece voltar a se sentir no comando</h2>
+    <p class="center">Não é sobre performance de ator pornô. É sobre ter de volta o controle, a firmeza e a confiança pra não pensar duas vezes na hora H.</p>
+    <!-- [CHECKOUT] -->
+    <a class="cta" href="#">SIM, QUERO DESTRAVAR<small>método + 3 bônus por R$27,90 · garantia de 30 dias</small></a>
+
+    <h2 class="center" style="margin-top:34px">Perguntas frequentes</h2>
+    <details><summary>Como eu recebo o material?</summary><div class="body">Assim que o pagamento é confirmado, você recebe o acesso por e-mail. É 100% online — abre no celular, tablet ou computador, quando e quantas vezes quiser.</div></details>
+    <details><summary>Quanto tempo por dia eu preciso?</summary><div class="body">5 minutos por dia. A rotina foi desenhada pra caber na vida real, sem academia e sem equipamento.</div></details>
+    <details><summary>Em quanto tempo eu vejo resultado?</summary><div class="body">Com o Protocolo Primeira Noite (bônus), muitos homens sentem diferença já na primeira semana. O plano completo de fortalecimento roda em 14 dias. Cada corpo responde no seu tempo.</div></details>
+    <details><summary>Funciona na minha idade?</summary><div class="body">Sim. O músculo responde a treino em qualquer idade, e o plano se ajusta ao nível que você indicou no teste — do iniciante ao mais avançado.</div></details>
+    <details><summary>É discreto? Vai aparecer alguma coisa na fatura?</summary><div class="body">Tudo é discreto: o material é digital e privado, e a cobrança aparece de forma neutra no cartão. Ninguém além de você precisa saber.</div></details>
+    <details><summary>E se eu não gostar?</summary><div class="body">Você tem 30 dias de garantia incondicional. Não gostou, devolvemos 100% do valor, sem perguntas.</div></details>
+
+    <!-- [CHECKOUT] -->
+    <a class="cta alt" href="#">GARANTIR MEU ACESSO POR R$27,90</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap disc">
+    <p><b>Método Rasga Xana</b></p>
+    <p>Este conteúdo é um programa de exercícios e bem-estar. Não substitui avaliação, diagnóstico ou tratamento médico e não constitui prescrição. Se você tem alguma condição de saúde, procure orientação de um profissional antes de iniciar. Resultados variam de pessoa para pessoa.</p>
+    <p>© 2026 Método Rasga Xana. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+</body>
+</html>
