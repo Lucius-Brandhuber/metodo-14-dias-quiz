@@ -79,6 +79,8 @@ html, body {
   display: flex;
   flex-direction: column;
 }
+/* slides de conteúdo: centralizados verticalmente (safe = não corta se for alto) */
+.quiz-main--center { justify-content: safe center; }
 
 .quiz-footer {
   width: 100%;
@@ -293,13 +295,20 @@ html, body {
 /* ---------- Blocos de conteúdo específicos ---------- */
 .content-block { display: flex; flex-direction: column; }
 
-/* imagens de conteúdo (notícias, ilustrações, logos) */
+/* imagens de conteúdo (notícias, ilustrações, logos) — tratamento de card */
 .content-img {
   display: block;
   width: 100%;
   height: auto;
   border-radius: var(--radius);
-  margin: 4px 0 6px;
+  border: 1px solid var(--line);
+  box-shadow: 0 6px 20px rgba(16, 21, 31, .10);
+  margin: 6px 0 8px;
+}
+/* logos de autoridade: um pouco menor e centralizado (a imagem já tem fundo branco) */
+.content-img--logos {
+  width: 90%;
+  margin: 10px auto 12px;
 }
 
 /* tabela comparativa (etapa 19) */
@@ -333,8 +342,15 @@ html, body {
 .review__name { font-weight: 800; margin: 4px 0 6px; }
 .review__text { font-size: 14px; color: #374151; line-height: 1.5; font-weight: 600; }
 
-/* gráfico de evolução (etapa 12) */
-.chart-wrap { margin: 6px 0; }
+/* gráfico de evolução (etapa 12) — dentro de um card suave */
+.chart-wrap {
+  margin: 6px 0 8px;
+  padding: 16px 14px 10px;
+  background: linear-gradient(180deg, #FBFCFE, #FFFFFF);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
 .chart-wrap svg { width: 100%; height: auto; display: block; }
 
 /* loading final (etapa 27) */

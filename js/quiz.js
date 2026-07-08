@@ -10,8 +10,8 @@
   var PV_URL = "../pv/";
 
   /* ---------- helper de imagem de conteúdo ---------- */
-  function img(src, alt) {
-    return '<img class="content-img" src="' + src + '" alt="' + (alt || "") + '" loading="lazy" decoding="async" />';
+  function img(src, alt, cls) {
+    return '<img class="content-img' + (cls ? " " + cls : "") + '" src="' + src + '" alt="' + (alt || "") + '" loading="lazy" decoding="async" />';
   }
 
   /* =========================================================
@@ -248,7 +248,7 @@
       type: "content",
       title: "O plano do Método 14 Dias foi desenvolvido por médicos de todo o mundo certificados em função erétil",
       sub: "Sua jornada é baseada em décadas de pesquisa",
-      blocks: [img("imagens/img14.webp", "Cambridge · Harvard · Oxford")],
+      blocks: [img("imagens/img14.webp", "Cambridge · Harvard · Oxford", "content-img--logos")],
       btn: "Continuar"
     },
 
@@ -537,6 +537,9 @@
   function render() {
     var step = STEPS[state.i];
     setProgress();
+    // centraliza verticalmente os slides de conteúdo (evita vazio embaixo)
+    var centered = step.type === "content" || step.type === "chart" || step.type === "comparison";
+    main.classList.toggle("quiz-main--center", centered);
     (RENDERERS[step.type] || renderContent)(step);
     scrollTop();
   }
