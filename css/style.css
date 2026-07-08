@@ -1,5 +1,5 @@
 /* ===========================================================
-   Método 14 Dias — Quiz (design system unificado)
+   Método Rasga Xana — Quiz (design system unificado)
    Marca: RASGA XANA / azul + preto
    =========================================================== */
 :root {
@@ -353,36 +353,24 @@ html, body {
 }
 .chart-wrap svg { width: 100%; height: auto; display: block; }
 
-/* animação do gráfico */
-.ch-line {
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  animation: chDraw 1.6s ease forwards;
-}
-@keyframes chDraw { to { stroke-dashoffset: 0; } }
-.ch-area {
-  opacity: 0;
-  animation: chFade 1s ease .5s forwards;
-}
-@keyframes chFade { to { opacity: 1; } }
-.ch-dot {
-  opacity: 0;
-  transform: scale(0);
+/* animação do gráfico comparativo (barras crescem de baixo p/ cima) */
+.ch-bar {
+  transform: scaleY(0);
   transform-box: fill-box;
-  transform-origin: center;
-  animation: chPop .45s cubic-bezier(.34, 1.56, .64, 1) forwards;
+  transform-origin: bottom;
+  animation: chGrow .8s cubic-bezier(.22, 1, .36, 1) forwards;
 }
-@keyframes chPop { to { opacity: 1; transform: scale(1); } }
+@keyframes chGrow { to { transform: scaleY(1); } }
 .ch-label {
   opacity: 0;
-  transform: translateY(6px);
+  transform: translateY(6px) scale(.9);
   transform-box: fill-box;
   transform-origin: center;
-  animation: chLabel .5s ease forwards;
+  animation: chLabel .5s cubic-bezier(.34, 1.56, .64, 1) forwards;
 }
-@keyframes chLabel { to { opacity: 1; transform: translateY(0); } }
+@keyframes chLabel { to { opacity: 1; transform: translateY(0) scale(1); } }
 @media (prefers-reduced-motion: reduce) {
-  .ch-line, .ch-area, .ch-dot, .ch-label { animation: none; opacity: 1; stroke-dashoffset: 0; transform: none; }
+  .ch-bar, .ch-label { animation: none; opacity: 1; transform: none; }
 }
 
 /* loading final (etapa 27) */

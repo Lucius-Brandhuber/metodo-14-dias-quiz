@@ -1,5 +1,5 @@
 /* ===========================================================
-   Método 14 Dias — Quiz engine (27 etapas)
+   Método Rasga Xana — Quiz engine (27 etapas)
    Réplica fiel do funil de referência, design unificado.
    Placeholders (.img-ph) marcam onde entram as imagens do usuário.
    =========================================================== */
@@ -36,7 +36,7 @@
     {
       type: "content",
       title: '<span class="hl">Mais de 1 milhão de homens brasileiros..</span>',
-      sub: "escolheram o Método 14 Dias em 2026",
+      sub: "escolheram o Método Rasga Xana em 2026",
       blocks: [img("imagens/img5.webp", "Evolução dos exercícios — DIA 1 / DIA 14 / DIA 24")],
       note: "Nós ajudamos mais de <b>150.000 homens</b> a melhorar seu desempenho sexual.",
       btn: "Continuar"
@@ -126,7 +126,7 @@
     // 12 — Desejo: gráfico (até 7x)
     {
       type: "chart",
-      title: 'O programa do Método 14 Dias fortalece os músculos do assoalho pélvico e pode aumentar o tempo médio de relação em <span class="hl">até 7 vezes</span>',
+      title: 'O programa do Método Rasga Xana fortalece os músculos do assoalho pélvico e pode aumentar o tempo médio de relação em <span class="hl">até 7 vezes</span>',
       note: "Esse método ajuda os homens a elevarem sua vida íntima a um novo nível, mesmo com o passar dos anos.",
       btn: "Continuar"
     },
@@ -182,8 +182,8 @@
     // 19 — Prova: tabela comparativa + depoimento
     {
       type: "comparison",
-      title: "84% dos homens melhoraram significativamente sua função erétil seguindo o plano de exercícios do Método 14 Dias.",
-      cols: ["Sozinho", "Método 14 Dias"],
+      title: "84% dos homens melhoraram significativamente sua função erétil seguindo o plano de exercícios do Método Rasga Xana.",
+      cols: ["Sozinho", "Método Rasga Xana"],
       rows: [
         { label: "Durar mais na cama", a: true, b: true },
         { label: "Melhorar a ereção", a: false, b: true },
@@ -246,7 +246,7 @@
     // 26 — Autoridade
     {
       type: "content",
-      title: "O plano do Método 14 Dias foi desenvolvido por médicos de todo o mundo certificados em função erétil",
+      title: "O plano do Método Rasga Xana foi desenvolvido por médicos de todo o mundo certificados em função erétil",
       sub: "Sua jornada é baseada em décadas de pesquisa",
       blocks: [img("imagens/img14.webp", "Cambridge · Harvard · Oxford", "content-img--logos")],
       btn: "Continuar"
@@ -432,38 +432,37 @@
   }
 
   function chartSVG() {
-    // curva vermelho→verde: Ontem (baixo) → Hoje (Você) → Amanhã (alto)
+    // comparativo de barras: Você antes (baixo, vermelho) × Você depois (alto, verde, até 7x)
+    // baseline y=255; barras crescem de baixo p/ cima (scaleY animado, origem embaixo)
     return (
-      '<div class="chart-wrap"><svg viewBox="0 0 560 300" role="img" aria-label="Evolução do desempenho">' +
+      '<div class="chart-wrap"><svg viewBox="0 0 560 300" role="img" aria-label="Comparativo: você antes e depois do método">' +
       '<defs>' +
-      '<linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">' +
-      '<stop offset="0" stop-color="#EF4444"/><stop offset="0.5" stop-color="#F59E0B"/><stop offset="1" stop-color="#22C55E"/>' +
+      '<linearGradient id="barBefore" x1="0" y1="0" x2="0" y2="1">' +
+      '<stop offset="0" stop-color="#F87171"/><stop offset="1" stop-color="#EF4444"/>' +
       "</linearGradient>" +
-      '<linearGradient id="areaGrad" x1="0" y1="0" x2="1" y2="0">' +
-      '<stop offset="0" stop-color="#EF4444" stop-opacity="0.18"/><stop offset="0.5" stop-color="#F59E0B" stop-opacity="0.18"/><stop offset="1" stop-color="#22C55E" stop-opacity="0.28"/>' +
+      '<linearGradient id="barAfter" x1="0" y1="0" x2="0" y2="1">' +
+      '<stop offset="0" stop-color="#34D399"/><stop offset="1" stop-color="#16A34A"/>' +
       "</linearGradient>" +
       "</defs>" +
-      // grades
+      // grades horizontais
       '<g stroke="#E4E7EC" stroke-dasharray="4 6">' +
-      '<line x1="40" y1="60" x2="520" y2="60"/><line x1="40" y1="130" x2="520" y2="130"/>' +
-      '<line x1="40" y1="200" x2="520" y2="200"/><line x1="40" y1="255" x2="520" y2="255"/>' +
+      '<line x1="60" y1="70" x2="500" y2="70"/><line x1="60" y1="130" x2="500" y2="130"/>' +
+      '<line x1="60" y1="190" x2="500" y2="190"/>' +
       "</g>" +
-      // área + curva (animadas)
-      '<path class="ch-area" d="M40 250 Q200 235 280 175 T520 60 L520 255 L40 255 Z" fill="url(#areaGrad)"/>' +
-      '<path class="ch-line" pathLength="1" d="M40 250 Q200 235 280 175 T520 60" fill="none" stroke="url(#lineGrad)" stroke-width="5" stroke-linecap="round"/>' +
-      // pontos (surgem em sequência)
-      '<circle class="ch-dot" style="animation-delay:.15s" cx="40" cy="250" r="7" fill="#EF4444" stroke="#fff" stroke-width="3"/>' +
-      '<circle class="ch-dot" style="animation-delay:.8s" cx="280" cy="175" r="8" fill="#F59E0B" stroke="#fff" stroke-width="3"/>' +
-      '<circle class="ch-dot" style="animation-delay:1.45s" cx="520" cy="60" r="8" fill="#22C55E" stroke="#fff" stroke-width="3"/>' +
-      // rótulo "Você"
-      '<g class="ch-label" style="animation-delay:1s">' +
-      '<rect x="252" y="140" width="56" height="24" rx="6" fill="#F59E0B"/>' +
-      '<text x="280" y="157" text-anchor="middle" font-size="13" font-weight="800" fill="#fff">Você</text>' +
+      // linha de base
+      '<line x1="60" y1="255" x2="500" y2="255" stroke="#CBD2DA" stroke-width="2"/>' +
+      // barra ANTES (baixa)
+      '<rect class="ch-bar" style="animation-delay:.15s" x="120" y="207" width="120" height="48" rx="10" fill="url(#barBefore)"/>' +
+      // barra DEPOIS (alta ~7x)
+      '<rect class="ch-bar" style="animation-delay:.5s" x="320" y="60" width="120" height="195" rx="10" fill="url(#barAfter)"/>' +
+      // badge "até 7x" sobre a barra depois
+      '<g class="ch-label" style="animation-delay:1.1s">' +
+      '<rect x="342" y="24" width="76" height="26" rx="13" fill="#16A34A"/>' +
+      '<text x="380" y="42" text-anchor="middle" font-size="14" font-weight="900" fill="#fff">até 7x</text>' +
       "</g>" +
-      // eixo x
-      '<text x="40" y="278" text-anchor="middle" font-size="12" fill="#6B7280">Ontem</text>' +
-      '<text x="280" y="278" text-anchor="middle" font-size="12" fill="#6B7280">Hoje</text>' +
-      '<text x="520" y="278" text-anchor="middle" font-size="12" fill="#6B7280">Amanhã</text>' +
+      // rótulos das barras (eixo x)
+      '<text x="180" y="278" text-anchor="middle" font-size="13" font-weight="700" fill="#6B7280">Você antes</text>' +
+      '<text x="380" y="278" text-anchor="middle" font-size="13" font-weight="800" fill="#16A34A">Você depois</text>' +
       "</svg></div>"
     );
   }

@@ -1,6 +1,6 @@
-# Quiz — Método 14 Dias (RASGA XANA)
+# Quiz — Método Rasga Xana (RASGA XANA)
 
-Réplica funcional do funil de quiz de referência (marca NEVI), reconstruída com **design unificado**, marca **RASGA XANA / Método 14 Dias** (azul/preto) e as telas "feias" do original corrigidas. SPA estático (sem build).
+Réplica funcional do funil de quiz de referência (marca NEVI), reconstruída com **design unificado**, marca **RASGA XANA / Método Rasga Xana** (azul/preto) e as telas "feias" do original corrigidas. SPA estático (sem build).
 
 ## Rodar localmente
 ```
@@ -44,4 +44,4 @@ As imagens do usuário estão em `imagens/` e já ligadas em cada etapa:
 A etapa 27 (loading) termina com o CTA **"Ver meu plano"** apontando para `../pv/` (página de vendas — pasta ainda vazia, fora do escopo deste build).
 
 ## Copy: NEVI → RASGA XANA
-Todas as menções à marca "NEVI" do original foram trocadas por **Método 14 Dias / RASGA XANA**. O accent verde do original virou o **azul da marca** (`#1060F0`).
+Todas as menções à marca "NEVI" do original foram trocadas por **Método Rasga Xana / RASGA XANA**. O accent verde do original virou o **azul da marca** (`#1060F0`).
