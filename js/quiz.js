@@ -11,7 +11,7 @@
 
   /* ---------- helper de imagem de conteúdo ---------- */
   function img(src, alt) {
-    return '<img class="content-img" src="' + src + '" alt="' + (alt || "") + '" loading="lazy" />';
+    return '<img class="content-img" src="' + src + '" alt="' + (alt || "") + '" loading="lazy" decoding="async" />';
   }
 
   /* =========================================================
@@ -24,10 +24,10 @@
       title: 'Programa de exercícios para elevar sua <span class="hl">potência sexual</span>',
       sub: "Quiz de 1 minuto",
       options: [
-        { label: "18 - 30 anos", img: "imagens/img1.png" },
-        { label: "31 - 45 anos", img: "imagens/img2.png" },
-        { label: "46 - 55 anos", img: "imagens/img3.png" },
-        { label: "+ 56 anos", img: "imagens/img4.png" }
+        { label: "18 - 30 anos", img: "imagens/img1.webp" },
+        { label: "31 - 45 anos", img: "imagens/img2.webp" },
+        { label: "46 - 55 anos", img: "imagens/img3.webp" },
+        { label: "+ 56 anos", img: "imagens/img4.webp" }
       ],
       note: "Ao escolher sua idade e continuar, você concorda com nossos Termos de Serviço | Política de Privacidade"
     },
@@ -37,7 +37,7 @@
       type: "content",
       title: '<span class="hl">Mais de 1 milhão de homens brasileiros..</span>',
       sub: "escolheram o Método 14 Dias em 2026",
-      blocks: [img("imagens/img5.png", "Evolução dos exercícios — DIA 1 / DIA 14 / DIA 24")],
+      blocks: [img("imagens/img5.webp", "Evolução dos exercícios — DIA 1 / DIA 14 / DIA 24")],
       note: "Nós ajudamos mais de <b>150.000 homens</b> a melhorar seu desempenho sexual.",
       btn: "Continuar"
     },
@@ -47,9 +47,9 @@
       type: "imageOptions",
       title: "Escolha seu tipo de corpo",
       options: [
-        { label: "Magro", img: "imagens/img6.jpg" },
-        { label: "Médio/Forte", img: "imagens/img7.png" },
-        { label: "Acima do Peso", img: "imagens/img8.jpg" }
+        { label: "Magro", img: "imagens/img6.webp" },
+        { label: "Médio/Forte", img: "imagens/img7.webp" },
+        { label: "Acima do Peso", img: "imagens/img8.webp" }
       ],
       btn: "Continuar"
     },
@@ -58,7 +58,7 @@
     {
       type: "content",
       title: 'O método <span class="hl">100% natural</span> para vencer a ejaculação precoce',
-      blocks: [img("imagens/img9.png", "Notícia: Exercícios de Kegel — o segredo para ereções mais firmes")],
+      blocks: [img("imagens/img9.webp", "Notícia: Exercícios de Kegel — o segredo para ereções mais firmes")],
       note: "Feito 5 minutos em casa, sem equipamento, sem remédios. Resultados comprovados em 14 dias.",
       btn: "Continuar"
     },
@@ -79,7 +79,7 @@
         "Seu jeito de durar mais tempo vem da força e saúde dos músculos do assoalho pélvico." +
         "<br><br>E quanto mais você envelhece, mais fraco fica seu músculo masculino." +
         "<br><br>Músculos fortes ajudam você a ter ereções duras novamente, controlar a ejaculação e a durar mais na cama.",
-      blocks: [img("imagens/img10.png", "Comparativo dia 1 / dia 7 / dia 14 / dia 28")],
+      blocks: [img("imagens/img10.webp", "Comparativo dia 1 / dia 7 / dia 14 / dia 28")],
       btn: "Continuar"
     },
 
@@ -109,7 +109,7 @@
     // 10 — Notícia: contra pílulas
     {
       type: "content",
-      blocks: [img("imagens/img11.png", "Notícia: mortes por infarto ligadas a azulzinho/tadalafila")],
+      blocks: [img("imagens/img11.webp", "Notícia: mortes por infarto ligadas a azulzinho/tadalafila")],
       title: '<span class="hl">Não arrisque sua saúde com soluções temporárias.</span>',
       note: "Continue para receber o <b>protocolo natural</b> mais indicado para sua idade e baseado nas suas respostas.",
       btn: "Continuar"
@@ -172,7 +172,7 @@
     {
       type: "content",
       title: "A qualidade da ereção está diretamente ligada à força dos músculos do assoalho pélvico.",
-      blocks: [img("imagens/img12.png", "Anatomia do assoalho pélvico — músculo bulbocavernoso")],
+      blocks: [img("imagens/img12.webp", "Anatomia do assoalho pélvico — músculo bulbocavernoso")],
       note:
         "Um dos três principais músculos dessa região, essencial para a saúde sexual masculina, é o <b>músculo bulbocavernoso</b>. " +
         "Ele permite que o pênis se encha de sangue e mantenha a firmeza.",
@@ -248,7 +248,7 @@
       type: "content",
       title: "O plano do Método 14 Dias foi desenvolvido por médicos de todo o mundo certificados em função erétil",
       sub: "Sua jornada é baseada em décadas de pesquisa",
-      blocks: [img("imagens/img14.png", "Cambridge · Harvard · Oxford")],
+      blocks: [img("imagens/img14.webp", "Cambridge · Harvard · Oxford")],
       btn: "Continuar"
     },
 
@@ -297,7 +297,7 @@
       .map(function (o, idx) {
         return (
           '<button class="age-card" data-idx="' + idx + '">' +
-          '<img class="age-card__img" src="' + o.img + '" alt="' + o.label + '" loading="lazy" />' +
+          '<img class="age-card__img" src="' + o.img + '" alt="' + o.label + '" decoding="async" />' +
           '<div class="age-card__label">' + o.label + "</div>" +
           "</button>"
         );
@@ -343,7 +343,7 @@
       .map(function (o, idx) {
         return (
           '<button class="option option--check" data-idx="' + idx + '">' +
-          '<img class="option__thumb" src="' + o.img + '" alt="' + o.label + '" loading="lazy" />' +
+          '<img class="option__thumb" src="' + o.img + '" alt="' + o.label + '" loading="lazy" decoding="async" />' +
           '<span class="option__mark"></span>' +
           "<span>" + o.label + "</span>" +
           "</button>"
