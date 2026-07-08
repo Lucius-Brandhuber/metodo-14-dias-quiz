@@ -196,29 +196,38 @@ html, body {
 }
 .age-card:hover { border-color: var(--brand); box-shadow: var(--shadow-hover); }
 .age-card:active { transform: scale(.99); }
+.age-card__frame {
+  width: 100%;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  background: #F3F5F8;
+}
 .age-card__img {
   display: block;
   width: 100%;
-  aspect-ratio: 3/4;
+  height: 100%;
   object-fit: cover;
-  object-position: top center;
-  background: #F3F5F8;
+  object-position: center top;
+  transform: scale(1.22);
+  transform-origin: center 18%;
 }
 .age-card__label {
-  display: flex; align-items: center; gap: 8px;
+  display: flex; align-items: center; gap: 7px;
   background: var(--brand);
   color: #fff;
   font-weight: 700;
-  font-size: 15px;
-  padding: 12px 14px;
+  font-size: 13.5px;
+  white-space: nowrap;
+  padding: 10px 12px;
 }
 .age-card__label::before {
   content: "›";
+  flex: 0 0 auto;
   display: grid; place-items: center;
-  width: 22px; height: 22px;
+  width: 19px; height: 19px;
   border: 1.5px solid rgba(255,255,255,.7);
   border-radius: 50%;
-  font-size: 14px; line-height: 1;
+  font-size: 13px; line-height: 1;
 }
 
 /* ---------- Escala 1–5 ---------- */

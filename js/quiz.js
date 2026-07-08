@@ -297,7 +297,7 @@
       .map(function (o, idx) {
         return (
           '<button class="age-card" data-idx="' + idx + '">' +
-          '<img class="age-card__img" src="' + o.img + '" alt="' + o.label + '" decoding="async" />' +
+          '<div class="age-card__frame"><img class="age-card__img" src="' + o.img + '" alt="' + o.label + '" decoding="async" /></div>' +
           '<div class="age-card__label">' + o.label + "</div>" +
           "</button>"
         );
