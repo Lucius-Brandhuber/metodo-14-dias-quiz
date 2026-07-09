@@ -188,15 +188,17 @@ html, body {
   margin-top: 8px;
 }
 .age-card {
-  border: 1.5px solid var(--line);
+  /* borda como ANEL de sombra (não como border): com border + overflow:hidden
+     sobrava um filete branco nos cantos de baixo do rótulo azul. */
+  border: 0;
   border-radius: var(--radius);
   overflow: hidden;
   cursor: pointer;
   background: #fff;
-  box-shadow: var(--shadow);
-  transition: border-color .15s, box-shadow .15s, transform .1s;
+  box-shadow: 0 0 0 1.5px var(--line), var(--shadow);
+  transition: box-shadow .15s, transform .1s;
 }
-.age-card:hover { border-color: var(--brand); box-shadow: var(--shadow-hover); }
+.age-card:hover { box-shadow: 0 0 0 1.5px var(--brand), var(--shadow-hover); }
 .age-card:active { transform: scale(.99); }
 .age-card__frame {
   width: 100%;
@@ -219,9 +221,8 @@ html, body {
   font-size: 13.5px;
   white-space: nowrap;
   padding: 10px 12px;
-  /* arredonda os cantos de baixo pra o azul preencher a curva do card
-     (evita o filete branco no canto com overflow:hidden + borda) */
-  border-radius: 0 0 calc(var(--radius) - 1.5px) calc(var(--radius) - 1.5px);
+  /* cantos de baixo arredondados = casam com o clip do card (sem filete branco) */
+  border-radius: 0 0 var(--radius) var(--radius);
 }
 .age-card__label::before {
   content: "›";
