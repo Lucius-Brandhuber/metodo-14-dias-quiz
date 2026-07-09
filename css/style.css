@@ -188,6 +188,10 @@ html, body {
   margin-top: 8px;
 }
 .age-card {
+  /* zera o padding padrão do <button> (era "1px 6px") — é o que deixava a
+     imagem e o rótulo azul com margem branca em vez de preencher a caixa. */
+  padding: 0;
+  margin: 0;
   /* borda como ANEL de sombra (não como border): com border + overflow:hidden
      sobrava um filete branco nos cantos de baixo do rótulo azul. */
   border: 0;
