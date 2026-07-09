@@ -1,47 +1,38 @@
-# Quiz — Método 14 Dias (RASGA XANA)
+# Funil Rasga Xana — Método Rasga Xana (quiz + PV + admin)
 
-Réplica funcional do funil de quiz de referência (marca NEVI), reconstruída com **design unificado**, marca **RASGA XANA / Método 14 Dias** (azul/preto) e as telas "feias" do original corrigidas. SPA estático (sem build).
+Funil de quiz otimizado (16 telas, metodologia funil-quiz/Schwartz) + página de vendas + painel de analytics. SPA estático (sem build).
+
+**No ar:** Vercel `https://rasga-xana.vercel.app` (projeto `rasga-xana`, team lucius-team2) e GitHub Pages `https://lucius-brandhuber.github.io/metodo-14-dias-quiz/`.
 
 ## Rodar localmente
 ```
-python3 -m http.server 4750 --directory "."
+python3 -m http.server 4790 --directory "."
 ```
-Abre em `http://localhost:4750`. (No app: preview config `kegel`, porta 4750.)
+(No app: preview config `rasga-xana`, porta 4790.)
 
 ## Arquivos
-- `index.html` — casca (header com logo + barra de progresso, main, rodapé)
-- `css/style.css` — design system unificado, mobile-first
-- `js/quiz.js` — array `STEPS` (27 etapas) + engine de render/navegação
-- `imagens/logo.png` — logo RASGA XANA (xadrez de falsa transparência já removido)
+- `index.html` — casca do quiz (header com logo + barra de progresso)
+- `js/quiz.js` — array `STEPS` (16 telas) + engine de render/navegação
+- `css/style.css` — design system unificado, mobile-first (azul `#1060F0`)
+- `track.js` — tracking do funil (`window.rxTrack`/`rxUtm`, backend `rx-api`, sem A/B)
+- `pv/index.html` — página de vendas (CSS inline; imagens do quiz NÃO se repetem aqui — prova/mecanismo/autoridade são HTML/CSS/SVG)
+- `admin.html` — painel de analytics (mesma senha dos outros admins; chave de API TOFU no 1º login)
 
-## Deep-link (QA / retomar)
-`index.html#9` abre direto a etapa 9 (útil pra testar/revisar telas específicas).
+## Estrutura do quiz (16 telas)
+1. Idade *(engajamento)* · 2. Tipo de corpo · 3–6. Problema (duração, frequência, ereção, tempo) · 7. Educação músculo (img10) · 8. Pornô (causa-raiz, ancora Bônus 2) · 9. Notícia anti-pílula (img11) · 10. Objetivos *(desejo)* · 11. Pergunta-ponte · 12. Gráfico "até 7x" · 13. Prova 84% + depoimento · 14. Anatomia (img12) · 15. Autoridade (img14) · 16. Transição forte → PV.
 
----
+Deep-link p/ QA: `index.html#9` abre a tela 9.
 
-## Imagens (já integradas ✅)
+## Tracking / Admin
+- Backend: Supabase Edge Function **`rx-api`** (projeto `nyuycffqncuavzuhyofq`, tabelas `rx_*`).
+- Eventos: `view 0` → `answer 1..15` → `view diagnostico` → `click cta_pv` → `view pv` → `checkout_click`.
+- Meta CAPI desligada até setar os secrets `RX_PIXEL_ID` e `RX_META_CAPI_TOKEN` (não reusar IDs de outros funis).
+- Postback de venda do checkout: `POST rx-api?src=venda`.
 
-As imagens do usuário estão em `imagens/` e já ligadas em cada etapa:
+## Pendências
+- `[CHECKOUT]`: colar o link real nos CTAs da PV (const `CHECKOUT` no `track.js` reescreve os 3 botões).
+- Trocar `imagens/img7.webp` (marca d'água dreamstime).
+- Pixel Meta / Utmify próprios (placeholders no `<head>` do quiz e da PV).
 
-| Etapa | Tela | Arquivo |
-|-------|------|---------|
-| 1 | Idade (4 fotos) | `img1.png` 18-30 · `img2.png` 31-45 · `img3.png` 46-55 · `img4.png` +56 |
-| 2 | Prova social DIA 1/14/24 | `img5.png` |
-| 3 | Tipo de corpo | `img6.jpg` Magro · `img7.png` Médio/Forte · `img8.jpg` Acima do peso |
-| 4 | Notícia Kegel | `img9.png` |
-| 6 | Força do músculo dia 1/7/14/28 | `img10.png` |
-| 10 | Notícia contra pílula | `img11.png` |
-| 12 | Gráfico "até 7×" | *(SVG em código — sem imagem)* |
-| 18 | Anatomia | `img12.png` |
-| 19 | Tabela + depoimento | *(tabela e depoimento em código — sem imagem)* |
-| 26 | Autoridade (logos) | `img14.png` |
-
-**Pontos de atenção:**
-- `img7.png` (tipo de corpo Médio/Forte) tem **marca d'água "dreamstime"** — recomendado trocar por uma sem marca.
-- `img13.png` é a **tabela comparativa** original (etapa 19). Não está em uso: a tabela foi refeita em código (responsiva). Fica de reserva caso prefira a imagem.
-
-## Fim do quiz
-A etapa 27 (loading) termina com o CTA **"Ver meu plano"** apontando para `../pv/` (página de vendas — pasta ainda vazia, fora do escopo deste build).
-
-## Copy: NEVI → RASGA XANA
-Todas as menções à marca "NEVI" do original foram trocadas por **Método 14 Dias / RASGA XANA**. O accent verde do original virou o **azul da marca** (`#1060F0`).
+## Imagens não usadas (reserva)
+- `img9` (notícia Kegel — a versão enxuta ficou com uma tela de notícia só), `img13` (tabela original, refeita em código), `img5` agora é só da PV (hero).

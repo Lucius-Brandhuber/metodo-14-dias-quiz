@@ -7,7 +7,8 @@
 <title>Método Rasga Xana</title>
 <meta name="description" content="O treino de 5 minutos por dia que devolve controle e firmeza em 14 dias — em casa, sem remédio e sem efeito colateral.">
 
-<!-- [PIXEL] Meta Pixel / Utmify entram aqui quando o funil tiver tracking (não copiar os IDs do Reconexão Materna) -->
+<!-- [PIXEL] Meta Pixel / Utmify do Rasga Xana entram aqui quando existirem (não copiar os IDs do Reconexão Materna) -->
+<script src="../track.js?v=1"></script>
 
 <link rel="icon" type="image/webp" href="../imagens/logo.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,6 +60,8 @@
   .cta.alt{background:linear-gradient(180deg,#2f7bff,#0a47b8);box-shadow:0 12px 26px rgba(16,96,240,.3);animation:none}
   .anchor-btn{display:inline-block;background:none;border:2px solid var(--brand);color:var(--brand-d);font-weight:800;font-size:15px;
        padding:12px 22px;border-radius:999px;text-decoration:none;margin:6px auto 0}
+  .discreet{font-size:13.5px;font-weight:700;color:#3d4759;background:#f2f6ff;border:1px solid var(--line);border-radius:10px;
+       max-width:520px;margin:-6px auto 10px;padding:9px 14px}
 
   /* identificação */
   .idcard{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--shadow)}
@@ -76,11 +79,13 @@
          font-family:'Nunito';font-weight:900;font-size:20px;display:flex;align-items:center;justify-content:center}
   .layer h3{margin-bottom:4px}
   .layer p{margin:0;color:var(--muted);font-size:15.5px}
-  .mechimg{border-radius:16px;box-shadow:var(--shadow);margin:6px auto 0;max-width:420px;width:100%}
+  .strengthcard{background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);margin:6px auto 0;max-width:460px;padding:16px 14px 8px}
+  .strengthcard__title{text-align:center;font-weight:900;font-size:14px;color:var(--brand-d);margin-bottom:6px}
+  .strengthcard svg{width:100%;height:auto;display:block}
 
-  /* anti-pílula callout */
+  /* anti-pílula callout (só CSS — a notícia com imagem ficou no quiz) */
   .warn{display:flex;gap:16px;align-items:center;background:#fff5f5;border:1px solid #f6d6d6;border-left:5px solid #e5484d;border-radius:14px;padding:16px 18px;margin:8px 0}
-  .warn img{width:96px;flex:none;border-radius:10px}
+  .warn .wicon{flex:none;width:52px;height:52px;border-radius:50%;background:#fdeaea;border:2px solid #f0b9b9;display:flex;align-items:center;justify-content:center;font-size:26px}
   .warn p{margin:0;font-size:15px;color:#7a2c2f}
   .warn b{color:#c0322f}
 
@@ -93,14 +98,17 @@
          font-size:13px;font-weight:900;display:flex;align-items:center;justify-content:center;line-height:1}
   ul.deliver b{color:var(--ink)}
 
-  /* origem/autoridade */
-  .authimg{border-radius:16px;box-shadow:var(--shadow);margin:0 auto 20px;max-width:380px;width:100%;background:#fff;padding:10px}
+  /* origem/autoridade (badges tipográficos — a imagem de logos ficou no quiz) */
+  .unirow{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+  .uni{font-family:Georgia,'Times New Roman',serif;font-weight:700;font-size:15px;letter-spacing:2.5px;color:#3d4759;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:11px 16px;box-shadow:0 4px 12px rgba(16,21,31,.05)}
 
   /* prova */
   .proofnum{text-align:center;font-family:'Nunito';font-weight:900;font-size:40px;color:var(--brand);line-height:1}
   .proofnum small{display:block;font-family:'Nunito';font-size:15px;font-weight:700;color:var(--muted);margin-top:2px}
-  .grid{display:grid;grid-template-columns:1fr;gap:14px;margin:20px 0}
-  .grid img{border-radius:14px;box-shadow:0 8px 20px rgba(0,0,0,.08);width:100%}
+  .statgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0 14px}
+  .stat{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 14px;text-align:center;box-shadow:0 4px 12px rgba(16,96,240,.06)}
+  .stat__n{font-family:'Nunito';font-weight:900;font-size:27px;color:var(--brand-d);line-height:1.05}
+  .stat__l{font-size:13px;color:var(--muted);font-weight:700;margin-top:5px;line-height:1.35}
 
   /* depoimentos (balão de WhatsApp) */
   .wachat{background:#e5ddd3;border-radius:18px;padding:16px 12px 14px;margin-bottom:14px;box-shadow:0 6px 16px rgba(16,96,240,.06)}
@@ -186,7 +194,8 @@
     <p class="lead">O <b>Método Rasga Xana</b> é um passo a passo de exercícios para o assoalho pélvico masculino — os mesmos músculos que decidem quanto você dura e quão firme você fica. Feito em casa, no seu tempo, sem remédio e sem efeito colateral.</p>
     <img class="heroimg" src="../imagens/img5.webp" alt="Evolução do desempenho — Dia 1, Dia 14, Dia 24">
     <a class="cta" href="#oferta">QUERO DESTRAVAR MEU DESEMPENHO<small>acesso imediato · garantia de 30 dias</small></a>
-    <p class="center" style="font-size:13px;color:var(--muted);margin-top:-6px">Programa de exercícios e bem-estar — não substitui avaliação médica.</p>
+    <p class="center discreet">🔒 100% discreto — material digital privado e cobrança neutra no cartão. Ninguém fica sabendo.</p>
+    <p class="center" style="font-size:13px;color:var(--muted);margin-top:0">Programa de exercícios e bem-estar — não substitui avaliação médica.</p>
   </div>
 </section>
 
@@ -219,7 +228,27 @@
       <div class="layer"><div class="num">2</div><div><h3>Firmeza</h3><p>É esse músculo que prende o sangue dentro do pênis. Forte, ele deixa a ereção mais dura e mais duradoura.</p></div></div>
       <div class="layer"><div class="num">3</div><div><h3>Potência</h3><p>Mais sensibilidade, orgasmo mais intenso e a confiança de quem sabe que vai dar conta.</p></div></div>
     </div>
-    <img class="mechimg" src="../imagens/img12.webp" alt="Anatomia do assoalho pélvico — músculo bulbocavernoso">
+    <div class="strengthcard">
+      <div class="strengthcard__title">Força do músculo ao longo do treino</div>
+      <svg viewBox="0 0 560 250" role="img" aria-label="Progressão da força do assoalho pélvico do dia 1 ao dia 14">
+        <defs>
+          <linearGradient id="strFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#1060F0" stop-opacity=".28"/><stop offset="1" stop-color="#1060F0" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <g stroke="#D5DEEF" stroke-dasharray="4 6"><line x1="50" y1="60" x2="520" y2="60"/><line x1="50" y1="120" x2="520" y2="120"/></g>
+        <line x1="50" y1="200" x2="520" y2="200" stroke="#B9C4DA" stroke-width="2"/>
+        <path d="M70 185 C 170 180, 220 150, 300 105 C 370 66, 430 50, 500 42 L 500 200 L 70 200 Z" fill="url(#strFill)"/>
+        <path class="str-line" d="M70 185 C 170 180, 220 150, 300 105 C 370 66, 430 50, 500 42" fill="none" stroke="#1060F0" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="70" cy="185" r="7" fill="#fff" stroke="#1060F0" stroke-width="4"/>
+        <circle cx="300" cy="105" r="7" fill="#fff" stroke="#1060F0" stroke-width="4"/>
+        <circle cx="500" cy="42" r="8" fill="#1060F0" stroke="#fff" stroke-width="3"/>
+        <text x="70" y="226" text-anchor="middle" font-size="13" font-weight="700" fill="#6B7280">Dia 1</text>
+        <text x="300" y="226" text-anchor="middle" font-size="13" font-weight="700" fill="#6B7280">Dia 7</text>
+        <text x="500" y="226" text-anchor="middle" font-size="13" font-weight="800" fill="#0A47B8">Dia 14</text>
+        <g><rect x="404" y="8" width="130" height="24" rx="12" fill="#0A47B8"/><text x="469" y="25" text-anchor="middle" font-size="12.5" font-weight="900" fill="#fff">controle + firmeza</text></g>
+      </svg>
+    </div>
     <p class="center" style="font-weight:800;margin-top:16px">É o mesmo princípio que a fisioterapia pélvica usa. A diferença é que aqui virou um plano simples de 14 dias, pra fazer sozinho em casa.</p>
   </div>
 </section>
@@ -253,7 +282,7 @@
 <section class="paper">
   <div class="wrap">
     <div class="warn">
-      <img src="../imagens/img11.webp" alt="Alerta sobre riscos de comprimidos de efeito rápido">
+      <div class="wicon" aria-hidden="true">⚠️</div>
       <p><b>Remédio não treina nada.</b> A pílula força uma solução temporária e cobra caro do coração. O Método Rasga Xana vai na raiz: fortalece o músculo pra você não depender de nada.</p>
     </div>
   </div>
@@ -278,8 +307,11 @@
 <!-- ============ ORIGEM / AUTORIDADE ============ -->
 <section class="paper">
   <div class="wrap">
-    <img class="authimg" src="../imagens/img14.webp" alt="Pesquisa de universidades de referência">
-    <h2 class="center">De onde vem o Método</h2>
+    <div class="unirow" aria-label="Universidades cujas pesquisas embasam os exercícios">
+      <span class="uni">CAMBRIDGE</span><span class="uni">HARVARD</span><span class="uni">OXFORD</span>
+    </div>
+    <p class="center" style="font-size:12.5px;color:var(--muted);margin-top:8px">Exercícios estudados em pesquisas de universidades de referência</p>
+    <h2 class="center" style="margin-top:22px">De onde vem o Método</h2>
     <p class="center lead">O Método Rasga Xana organiza, num plano simples, exercícios do assoalho pélvico masculino que já são estudados e usados na fisioterapia da saúde sexual do homem há décadas.</p>
     <p class="center">Nada de fórmula mágica: é treino de músculo, com progressão pensada pra caber na sua rotina e funcionar na sua idade — do jeito que o seu resultado no teste indicou.</p>
   </div>
@@ -289,10 +321,13 @@
 <section>
   <div class="wrap">
     <div class="proofnum">+150 mil<small>homens já começaram esse treino em casa</small></div>
-    <div class="grid">
-      <img src="../imagens/img10.webp" alt="Evolução da força do músculo — dia 1, 7, 14, 28">
+    <div class="statgrid">
+      <div class="stat"><div class="stat__n">84%</div><div class="stat__l">relataram melhora significativa na função erétil</div></div>
+      <div class="stat"><div class="stat__n">até 7x</div><div class="stat__l">mais tempo de relação com o músculo treinado</div></div>
+      <div class="stat"><div class="stat__n">5 min</div><div class="stat__l">por dia, em casa, sem equipamento</div></div>
+      <div class="stat"><div class="stat__n">14 dias</div><div class="stat__l">é o tempo do plano completo</div></div>
     </div>
-    <p class="center" style="font-size:13px;color:var(--muted);font-style:italic">84% dos homens relataram melhora significativa seguindo o plano. Cada corpo é único — resultados variam.</p>
+    <p class="center" style="font-size:13px;color:var(--muted);font-style:italic">Cada corpo é único — resultados variam.</p>
 
     <h3 class="center" style="margin-top:26px">O que os caras estão dizendo</h3>
     <div class="wachat">
@@ -340,7 +375,7 @@
       </div>
       <!-- [CHECKOUT] trocar o href="#" pelo link real do checkout (Kiwify/Hotmart/Cakto) -->
       <a class="cta" href="#">QUERO COMEÇAR AGORA<small>acesso imediato · 100% online e discreto</small></a>
-      <p class="center" style="font-size:13px;color:var(--muted)">Pagamento seguro · Acesso liberado na hora, no seu celular.</p>
+      <p class="center" style="font-size:13px;color:var(--muted)">Pagamento seguro · Acesso liberado na hora, no seu celular.<br>🔒 Cobrança aparece de forma neutra no cartão — ninguém fica sabendo.</p>
     </div>
   </div>
 </section>
@@ -389,6 +424,17 @@
       entries.forEach(function(e){ if(e.isIntersecting){ el.classList.add('in'); io.disconnect(); } });
     }, { threshold: 0.4 });
     io.observe(el);
+  })();
+
+  /* tracking: abriu a PV + cliques de checkout (rxTrack/rxUtm vêm do track.js) */
+  (function(){
+    if(window.rxTrack) rxTrack.view('pv');
+    var url = (window.rxCheckout && rxCheckout.url && rxCheckout.url !== '#') ? rxCheckout.url : null;
+    document.querySelectorAll('a.cta[href="#"], a.cta[href^="http"]').forEach(function(a){
+      if(a.getAttribute('href') === '#' && !url) { /* [CHECKOUT] ainda placeholder */ }
+      else if(url) a.href = window.rxUtm ? rxUtm.append(url) : url;
+      a.addEventListener('click', function(){ if(window.rxTrack) rxTrack.checkout(a.textContent.trim().slice(0,60)); });
+    });
   })();
 </script>
 

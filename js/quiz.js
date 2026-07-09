@@ -1,12 +1,14 @@
 /* ===========================================================
-   Método 14 Dias — Quiz engine (27 etapas)
-   Réplica fiel do funil de referência, design unificado.
-   Placeholders (.img-ph) marcam onde entram as imagens do usuário.
+   Método Rasga Xana — Quiz engine (16 telas, versão otimizada)
+   Ordem pela metodologia funil-quiz (Schwartz):
+   engajamento → problema → desejo → solução/transição.
+   Tracking: window.rxTrack (track.js) — view 0, answer 1..15,
+   view 'diagnostico', click 'cta_pv'.
    =========================================================== */
 (function () {
   "use strict";
 
-  // Para onde o quiz leva ao final (página de vendas — ainda vazia).
+  // Para onde o quiz leva ao final (página de vendas).
   var PV_URL = "pv/";
 
   /* ---------- helper de imagem de conteúdo ---------- */
@@ -15,14 +17,15 @@
   }
 
   /* =========================================================
-     DADOS DAS 27 ETAPAS
+     DADOS DAS 16 ETAPAS
      ========================================================= */
   var STEPS = [
-    // 1 — Engajamento: idade
+    // 1 — Engajamento: idade (fácil, no automático)
     {
+      id: "idade",
       type: "age",
       title: 'Programa de exercícios para elevar sua <span class="hl">potência sexual</span>',
-      sub: "Quiz de 1 minuto",
+      sub: "Teste rápido de 1 minuto — seu plano é montado pela sua idade e suas respostas",
       options: [
         { label: "18 - 30 anos", img: "imagens/img1.webp" },
         { label: "31 - 45 anos", img: "imagens/img2.webp" },
@@ -32,20 +35,12 @@
       note: "Ao escolher sua idade e continuar, você concorda com nossos Termos de Serviço | Política de Privacidade"
     },
 
-    // 2 — Prova social
+    // 2 — Engajamento: tipo de corpo (visual, fácil)
     {
-      type: "content",
-      title: '<span class="hl">Mais de 1 milhão de homens brasileiros..</span>',
-      sub: "escolheram o Método 14 Dias em 2026",
-      blocks: [img("imagens/img5.webp", "Evolução dos exercícios — DIA 1 / DIA 14 / DIA 24")],
-      note: "Nós ajudamos mais de <b>150.000 homens</b> a melhorar seu desempenho sexual.",
-      btn: "Continuar"
-    },
-
-    // 3 — Tipo de corpo
-    {
+      id: "corpo",
       type: "imageOptions",
       title: "Escolha seu tipo de corpo",
+      sub: "Isso ajusta a intensidade dos exercícios do seu plano",
       options: [
         { label: "Magro", img: "imagens/img6.webp" },
         { label: "Médio/Forte", img: "imagens/img7.webp" },
@@ -54,136 +49,107 @@
       btn: "Continuar"
     },
 
-    // 4 — Notícia (mecanismo Kegel)
+    // 3 — Problema: duração
     {
-      type: "content",
-      title: 'O método <span class="hl">100% natural</span> para vencer a ejaculação precoce',
-      blocks: [img("imagens/img9.webp", "Notícia: Exercícios de Kegel — o segredo para ereções mais firmes")],
-      note: "Feito 5 minutos em casa, sem equipamento, sem remédios. Resultados comprovados em 14 dias.",
-      btn: "Continuar"
-    },
-
-    // 5 — Objetivos (multi)
-    {
-      type: "multiSelect",
-      title: "Escolha seus objetivos",
-      sub: "Selecione todos os que se aplicam",
-      options: ["Durar mais durante o sexo", "Ter orgasmos mais intensos", "Ter ereções mais firmes"],
-      btn: "Continuar"
-    },
-
-    // 6 — Educação: força do músculo
-    {
-      type: "content",
-      lead:
-        "Seu jeito de durar mais tempo vem da força e saúde dos músculos do assoalho pélvico." +
-        "<br><br>E quanto mais você envelhece, mais fraco fica seu músculo masculino." +
-        "<br><br>Músculos fortes ajudam você a ter ereções duras novamente, controlar a ejaculação e a durar mais na cama.",
-      blocks: [img("imagens/img10.webp", "Comparativo dia 1 / dia 7 / dia 14 / dia 28")],
-      btn: "Continuar"
-    },
-
-    // 7 — Problema: duração
-    {
+      id: "duracao",
       type: "single",
       title: "Quanto tempo, em média, dura sua relação sexual?",
+      sub: "Escolha uma opção para avançar",
       options: ["Menos de 2 minutos", "De 2 a 7 minutos", "De 7 a 15 minutos", "Mais de 15 minutos"]
     },
 
-    // 8 — Problema: ejaculação
+    // 4 — Problema: ejaculação antes da hora
     {
+      id: "frequencia",
       type: "single",
-      title: "Com que frequência você ejacula antes do que gostaria?",
-      sub: "Escolhe uma opção para avançar",
-      options: ["Nunca", "Às vezes", "Na maior parte das vezes"]
+      title: "Com que frequência você termina antes do que gostaria?",
+      sub: "Escolha uma opção para avançar",
+      options: ["Quase sempre", "Na maior parte das vezes", "Às vezes", "Raramente"]
     },
 
-    // 9 — Escala: controle da ejaculação
+    // 5 — Problema: força da ereção
     {
-      type: "scale",
-      title: "Quanto é difícil para você controlar a ejaculação durante o sexo?",
-      sub: "De 1 (baixo) a 5 (alto)",
-      ends: ["Baixo", "Alto"]
+      id: "erecao",
+      type: "single",
+      title: "Como anda a força da sua ereção durante o sexo?",
+      sub: "Escolha uma opção para avançar",
+      options: ["Está tudo bem, mas quero melhorar", "Às vezes tenho dificuldades", "Costumo ter dificuldades com frequência"]
     },
 
-    // 10 — Notícia: contra pílulas
+    // 6 — Problema: há quanto tempo (urgência da dor)
     {
+      id: "tempo",
+      type: "single",
+      title: "Há quanto tempo isso vem incomodando você?",
+      sub: "Quanto mais tempo, mais fraco o músculo fica — e mais importa começar certo",
+      options: ["Menos de 6 meses", "De 6 meses a 1 ano", "De 1 a 3 anos", "Mais de 3 anos"]
+    },
+
+    // 7 — Educação: mecanismo do músculo (respiro entre problema e desejo)
+    {
+      id: "educacao",
+      type: "content",
+      lead:
+        "Durar pouco e perder a firmeza não é falta de vontade — é a força dos músculos do assoalho pélvico." +
+        "<br><br>E quanto mais você envelhece, mais fraco esse músculo fica." +
+        "<br><br>A boa notícia: músculo se treina. Forte, ele segura a ejaculação, mantém a ereção dura e faz você durar mais.",
+      blocks: [img("imagens/img10.webp", "Evolução da força do músculo — dia 1, dia 7, dia 14, dia 28")],
+      btn: "Entendi, continuar"
+    },
+
+    // 8 — Problema/causa-raiz: pornô (ancora o Bônus 2 — tom sem julgamento)
+    {
+      id: "porno",
+      type: "single",
+      title: "Com que frequência você assiste pornô?",
+      sub: "Sem julgamento — o excesso dessensibiliza e afeta a firmeza. Sua resposta ajusta o plano.",
+      options: ["Pelo menos uma vez por dia", "Algumas vezes por semana", "Algumas vezes por mês", "Raramente ou nunca"]
+    },
+
+    // 9 — Urgência: notícia contra a pílula
+    {
+      id: "pilula",
       type: "content",
       blocks: [img("imagens/img11.webp", "Notícia: mortes por infarto ligadas a azulzinho/tadalafila")],
       title: '<span class="hl">Não arrisque sua saúde com soluções temporárias.</span>',
-      note: "Continue para receber o <b>protocolo natural</b> mais indicado para sua idade e baseado nas suas respostas.",
+      note: "A pílula age enquanto está no sangue — e cobra caro do coração. Continue para receber o <b>protocolo natural</b> indicado para sua idade e suas respostas.",
+      btn: "Quero o método natural"
+    },
+
+    // 10 — Desejo: objetivos (depois da dor consolidada)
+    {
+      id: "objetivos",
+      type: "multiSelect",
+      title: "O que você quer conquistar nos próximos 14 dias?",
+      sub: "Selecione todos os que se aplicam",
+      options: ["Durar mais durante o sexo", "Ter ereções mais firmes", "Ter orgasmos mais intensos", "Recuperar a confiança na hora H"],
       btn: "Continuar"
     },
 
-    // 11 — Problema: já treinou?
+    // 11 — Desejo→solução: pergunta-ponte (o lead se vende sozinho)
     {
+      id: "ponte",
       type: "single",
-      title: "Já fez algum tipo de treino para melhorar o desempenho sexual?",
-      sub: "Escolhe uma opção para avançar",
-      options: ["Sim, já fiz", "Não, nunca treinei", "Não, mas já ouvi falar sobre", "O que são os músculos do assoalho pélvico?"]
+      title: "Você gostaria de alcançar isso com um método 100% natural, treinando 5 minutos por dia em casa?",
+      sub: "Sem remédio, sem equipamento, sem ninguém ficar sabendo",
+      options: ["Sim, quero", "Quero ver como funciona"]
     },
 
-    // 12 — Desejo: gráfico (até 7x)
+    // 12 — Prova/desejo: gráfico (até 7x)
     {
+      id: "grafico",
       type: "chart",
-      title: 'O programa do Método 14 Dias fortalece os músculos do assoalho pélvico e pode aumentar o tempo médio de relação em <span class="hl">até 7 vezes</span>',
+      title: 'O Método Rasga Xana fortalece os músculos do assoalho pélvico e pode aumentar o tempo médio de relação em <span class="hl">até 7 vezes</span>',
       note: "Esse método ajuda os homens a elevarem sua vida íntima a um novo nível, mesmo com o passar dos anos.",
       btn: "Continuar"
     },
 
-    // 13 — Problema: força da ereção
+    // 13 — Prova: tabela comparativa + depoimento
     {
-      type: "single",
-      title: "Como anda a força da sua ereção durante o sexo?",
-      sub: "Escolhe uma opção para avançar",
-      options: ["Está tudo bem, mas quero melhorar", "Às vezes tenho dificuldades", "Costumo ter dificuldades com frequência"]
-    },
-
-    // 14 — Problema: há quanto tempo
-    {
-      type: "single",
-      title: "Há quanto tempo você vem tendo dificuldades com ereção?",
-      sub: "Escolhe uma opção para avançar",
-      options: ["Menos de 6 meses", "De 6 a 12 meses", "De 1 a 3 anos", "De 3 a 5 anos", "Mais de 5 anos"]
-    },
-
-    // 15 — Problema: ereções matinais  (reconstruída no template padrão)
-    {
-      type: "single",
-      title: "Com que frequência você tem ereções matinais?",
-      options: ["Sempre", "Com frequência", "Raramente", "Nunca"]
-    },
-
-    // 16 — Problema: dificuldade antes do sexo
-    {
-      type: "single",
-      title: "Com que frequência você tem dificuldade para ter uma ereção antes do sexo?",
-      options: ["Sempre", "Com frequência", "Raramente", "Nunca"]
-    },
-
-    // 17 — Problema: duas vezes seguidas  (reconstruída no template padrão)
-    {
-      type: "single",
-      title: "Você consegue transar duas vezes seguidas?",
-      options: ["Sim, sem problemas", "Sim, mas preciso me esforçar", "Não, não consigo"]
-    },
-
-    // 18 — Educação: anatomia
-    {
-      type: "content",
-      title: "A qualidade da ereção está diretamente ligada à força dos músculos do assoalho pélvico.",
-      blocks: [img("imagens/img12.webp", "Anatomia do assoalho pélvico — músculo bulbocavernoso")],
-      note:
-        "Um dos três principais músculos dessa região, essencial para a saúde sexual masculina, é o <b>músculo bulbocavernoso</b>. " +
-        "Ele permite que o pênis se encha de sangue e mantenha a firmeza.",
-      btn: "Continuar"
-    },
-
-    // 19 — Prova: tabela comparativa + depoimento
-    {
+      id: "prova",
       type: "comparison",
-      title: "84% dos homens melhoraram significativamente sua função erétil seguindo o plano de exercícios do Método 14 Dias.",
-      cols: ["Sozinho", "Método 14 Dias"],
+      title: "84% dos homens melhoraram significativamente sua função erétil seguindo o plano de exercícios do Método Rasga Xana.",
+      cols: ["Sozinho", "Método Rasga Xana"],
       rows: [
         { label: "Durar mais na cama", a: true, b: true },
         { label: "Melhorar a ereção", a: false, b: true },
@@ -200,66 +166,63 @@
       btn: "Continuar"
     },
 
-    // 20 — Qualificação: atividade física
+    // 14 — Solução: anatomia (o "porquê funciona")
     {
-      type: "single",
-      title: "Qual é o seu nível de atividade física?",
-      options: ["Eu me exercito regularmente", "Eu me exercito de vez em quando", "Sou pouco ativo", "Não me exercito nunca"]
-    },
-
-    // 21 — Qualificação: pornô
-    {
-      type: "single",
-      title: "Com que frequência você assiste pornô?",
-      options: ["Pelo menos uma vez por dia", "3 a 4 vezes por semana", "Uma vez por semana", "De 1 a 2 vezes por mês", "Nunca"]
-    },
-
-    // 22 — Qualificação: estado civil  (reconstruída no template padrão)
-    {
-      type: "single",
-      title: "Qual é o seu estado civil?",
-      options: ["Casado", "Namorando", "Solteiro", "Prefiro não responder"]
-    },
-
-    // 23 — Qualificação: frequência sexual
-    {
-      type: "single",
-      title: "Em média, quantas vezes por mês você tem relações sexuais?",
-      options: ["Menos de 3 vezes por mês", "De 3 a 6 vezes por mês", "De 7 a 15 vezes por mês", "Mais de 15 vezes por mês", "Prefiro não responder"]
-    },
-
-    // 24 — Escala: libido
-    {
-      type: "scale",
-      title: "Como você avaliaria sua libido (desejo sexual) nos últimos 3 meses?",
-      sub: "De 1 (baixo) a 5 (alto)",
-      ends: ["Baixo", "Alto"]
-    },
-
-    // 25 — Qualificação: soluções rápidas  (reconstruída no template padrão)
-    {
-      type: "single",
-      title: "Você já tentou soluções de efeito rápido para melhorar sua vida íntima?",
-      options: ["Sim, uso com frequência", "Sim, já usei algumas vezes", "Não, nunca usei"]
-    },
-
-    // 26 — Autoridade
-    {
+      id: "anatomia",
       type: "content",
-      title: "O plano do Método 14 Dias foi desenvolvido por médicos de todo o mundo certificados em função erétil",
+      title: "A qualidade da ereção está diretamente ligada à força dos músculos do assoalho pélvico.",
+      blocks: [img("imagens/img12.webp", "Anatomia do assoalho pélvico — músculo bulbocavernoso")],
+      note:
+        "Um dos três principais músculos dessa região, essencial para a saúde sexual masculina, é o <b>músculo bulbocavernoso</b>. " +
+        "Ele permite que o pênis se encha de sangue e mantenha a firmeza.",
+      btn: "Continuar"
+    },
+
+    // 15 — Solução: autoridade
+    {
+      id: "autoridade",
+      type: "content",
+      title: "O plano do Método Rasga Xana foi desenvolvido por médicos de todo o mundo certificados em função erétil",
       sub: "Sua jornada é baseada em décadas de pesquisa",
       blocks: [img("imagens/img14.webp", "Cambridge · Harvard · Oxford", "content-img--logos")],
       btn: "Continuar"
     },
 
-    // 27 — Transição final (loading → PV)
+    // 16 — Etapa 04: transição forte → PV (transfere o desejo, não vende)
     {
-      type: "loading",
-      title: "Seu Plano será avaliado por um especialista em saúde íntima masculina",
-      loadingLabel: "Preparando seu Plano Personalizado…",
-      cta: "Ver meu plano"
+      id: "transicao",
+      type: "transition",
+      loadingTitle: "Analisando suas respostas…",
+      loadingLabel: "Montando seu Plano Personalizado",
+      title: 'Seu plano está <span class="hl">pronto</span>.',
+      text:
+        "Especialistas em saúde íntima masculina desenvolveram o <b>Método Rasga Xana</b>: exercícios de 5 minutos por dia " +
+        "que ajudam homens a durar <b>até 7x mais</b> e recuperar a firmeza em <b>14 dias</b> — sem pílula e sem efeito colateral.",
+      bullets: [
+        "Ajustado para sua idade e suas respostas",
+        "+150.000 homens já testaram",
+        "100% discreto — só você fica sabendo"
+      ],
+      cta: "VER MEU PLANO PERSONALIZADO →"
     }
   ];
+
+  /* =========================================================
+     TRACKING (rxTrack é opcional — o quiz funciona sem ele)
+     ========================================================= */
+  var T = window.rxTrack || null;
+  var stepStart = Date.now();
+  function trackView(idx) {
+    if (!T) return;
+    if (idx === 0) T.view(0); // visitante abriu o quiz
+    stepStart = Date.now();
+  }
+  function trackAnswer(idx) {
+    if (!T) return;
+    var ans = state.answers[idx];
+    if (Array.isArray(ans)) ans = ans.join(" | ");
+    T.answer(idx + 1, String(ans == null ? "continuar" : ans), Date.now() - stepStart);
+  }
 
   /* =========================================================
      ESTADO + ENGINE
@@ -275,6 +238,7 @@
 
   function next() {
     if (state.i < STEPS.length - 1) {
+      trackAnswer(state.i);
       state.i++;
       render();
     }
@@ -497,30 +461,50 @@
     document.getElementById("continueBtn").addEventListener("click", next);
   }
 
-  function renderLoading(step) {
+  /* Etapa 04 — loading curto e transição que transfere o desejo p/ a PV */
+  function renderTransition(step) {
     main.innerHTML =
       '<div class="spacer"></div>' +
-      head(step) +
+      '<h1 class="step-title">' + step.loadingTitle + "</h1>" +
       '<div class="loader-wrap">' +
       '<div class="loader-row"><span>' + step.loadingLabel + '</span><span id="loaderPct">0%</span></div>' +
       '<div class="loader-track"><div class="loader-fill" id="loaderFill"></div></div>' +
       "</div>" +
-      '<div id="ctaHolder"></div>' +
       '<div class="spacer"></div>';
     var fill = document.getElementById("loaderFill");
     var pctEl = document.getElementById("loaderPct");
     var p = 0;
     var timer = setInterval(function () {
-      p += Math.random() * 7 + 3;
+      p += Math.random() * 12 + 8;
       if (p >= 100) {
         p = 100;
         clearInterval(timer);
-        document.getElementById("ctaHolder").innerHTML =
-          '<a class="btn" style="display:block;text-align:center;text-decoration:none;" href="' + PV_URL + '">' + step.cta + "</a>";
+        setTimeout(showResult, 350);
       }
       fill.style.width = p + "%";
       pctEl.textContent = Math.round(p) + "%";
-    }, 180);
+    }, 160);
+
+    function showResult() {
+      if (T) T.view("diagnostico"); // concluiu o quiz (Lead)
+      var bullets = (step.bullets || [])
+        .map(function (b) { return '<li>' + b + "</li>"; })
+        .join("");
+      main.innerHTML =
+        '<div class="spacer"></div>' +
+        '<div class="transition">' +
+        '<div class="transition__badge">✓ Análise concluída</div>' +
+        '<h1 class="step-title">' + step.title + "</h1>" +
+        '<p class="step-lead">' + step.text + "</p>" +
+        '<ul class="transition__list">' + bullets + "</ul>" +
+        '<a class="btn transition__cta" id="ctaPv" href="' + PV_URL + '">' + step.cta + "</a>" +
+        "</div>" +
+        '<div class="spacer"></div>';
+      var cta = document.getElementById("ctaPv");
+      if (window.rxUtm) cta.href = rxUtm.append(PV_URL);
+      cta.addEventListener("click", function () { if (T) T.click("cta_pv", "Ver meu plano"); });
+      scrollTop();
+    }
   }
 
   var RENDERERS = {
@@ -532,12 +516,13 @@
     content: renderContent,
     chart: renderChart,
     comparison: renderComparison,
-    loading: renderLoading
+    transition: renderTransition
   };
 
   function render() {
     var step = STEPS[state.i];
     setProgress();
+    trackView(state.i);
     // centraliza verticalmente os slides de conteúdo (evita vazio embaixo)
     var centered = step.type === "content" || step.type === "chart" || step.type === "comparison";
     main.classList.toggle("quiz-main--center", centered);
