@@ -219,6 +219,9 @@ html, body {
   font-size: 13.5px;
   white-space: nowrap;
   padding: 10px 12px;
+  /* arredonda os cantos de baixo pra o azul preencher a curva do card
+     (evita o filete branco no canto com overflow:hidden + borda) */
+  border-radius: 0 0 calc(var(--radius) - 1.5px) calc(var(--radius) - 1.5px);
 }
 .age-card__label::before {
   content: "›";
