@@ -1,18 +1,59 @@
 /* Tracking do funil — Rasga Xana / Método Rasga Xana
    Gera session id, dispara view / answer / click / checkout_click para a API e
    mantém backup local. Usa fetch no-cors + text/plain (evita preflight CORS).
-   Sem A/B (preço único) — ver decisão "no-ab-tests". */
+
+   A/B de PREÇO no checkout (2026-07-08): 50/50 por visitante (localStorage rx_price_ab).
+   A = R$29,90 · B = R$34,90. O campo `ab` vai em TODO evento e o link injetado
+   nos CTAs da PV muda conforme a variante. Cada variante é um checkout separado na
+   Payt → configurar o postback de cada um com &ab=A / &ab=B (rx-api grava em rx_vendas.ab). */
 (function(){
   /* Backend de analytics (Supabase Edge Function rx-api) */
   var GAS = 'https://nyuycffqncuavzuhyofq.supabase.co/functions/v1/rx-api';
 
-  /* Checkout único. [CHECKOUT] trocar pelo link real (Payt/Kiwify/Cakto) quando existir. */
-  var CHECKOUT = '#';
-  var PRICE = 29.90;
+  /* ===== A/B de preço ===== */
+  var CHECKOUT_A = 'https://checkout.payt.com.br/c/L9OX3O';   // Variante A — R$29,90
+  var CHECKOUT_B = 'https://checkout.payt.com.br/c/LPV9AK';   // Variante B — R$34,90
+  var PRICE_A = 29.90, PRICE_B = 34.90;
+  function abPick(){
+    var k='rx_price_ab', v;
+    try{ v=localStorage.getItem(k); }catch(x){}
+    if(v!=='A' && v!=='B'){ v = (Math.random()<0.5 ? 'A' : 'B'); try{ localStorage.setItem(k,v); }catch(x){} }
+    return v;
+  }
+  var AB = abPick();
+  function checkoutUrl(){ return AB==='B' ? CHECKOUT_B : CHECKOUT_A; }
+  function checkoutPrice(){ return AB==='B' ? PRICE_B : PRICE_A; }
 
   function uid(){ return 'xxxxxxxx'.replace(/x/g,function(){return (Math.random()*16|0).toString(16);})+Date.now().toString(36); }
   function sid(){ var k='rx_sid'; var v=localStorage.getItem(k); if(!v){ v=uid(); try{ localStorage.setItem(k,v); }catch(x){} } return v; }
   function cookie(n){ var m=document.cookie.match('(^|;)\\s*'+n+'\\s*=\\s*([^;]+)'); return m?m.pop():''; }
+  function setCookie(n,v){ try{ document.cookie = n+'='+v+'; path=/; max-age=7776000; SameSite=Lax'; }catch(x){} }  // 90 dias
+  function qp(n){ try{ return new URLSearchParams(location.search).get(n)||''; }catch(x){ return ''; } }
+
+  /* ---- identificadores da Meta (fbp/fbc) ----------------------------------
+     O fbevents.js grava esses cookies de forma assíncrona — e some de vez quando
+     é bloqueado por adblock/ITP. O track.js lia o cookie antes de existir, então
+     a CAPI (server-side) saía sem fbc (0% dos eventos) e quase sempre sem fbp.
+     Aqui a gente garante os dois no formato oficial (fb.1.<ts>.<id>) e grava o
+     cookie: se o pixel carregar depois, ele reaproveita o mesmo valor. */
+  function ensureFbp(){
+    var v = cookie('_fbp');
+    if(!v){ v = 'fb.1.'+Date.now()+'.'+Math.floor(Math.random()*1e10); setCookie('_fbp', v); }
+    return v;
+  }
+  function ensureFbc(){
+    var v = cookie('_fbc');
+    if(v){ try{ localStorage.setItem('rx_fbc', v); }catch(x){} return v; }
+    var cl = qp('fbclid');
+    if(cl){                                   // clique de anúncio: monta o fbc agora
+      v = 'fb.1.'+Date.now()+'.'+cl;
+      setCookie('_fbc', v);
+      try{ localStorage.setItem('rx_fbc', v); }catch(x){}
+      return v;
+    }
+    try{ return localStorage.getItem('rx_fbc')||''; }catch(x){ return ''; }  // páginas seguintes do funil
+  }
+  var FBP = ensureFbp(), FBC = ensureFbc();
   function backup(e){ try{ var a=JSON.parse(localStorage.getItem('rx_ev')||'[]'); a.push(e); if(a.length>500)a=a.slice(-500); localStorage.setItem('rx_ev',JSON.stringify(a)); }catch(x){} }
   function seen(key){ var k='rx_seen_'+sid()+'_'+key; if(localStorage.getItem(k))return true; try{localStorage.setItem(k,'1');}catch(x){} return false; }
 
@@ -23,7 +64,7 @@
       step: (p.step!=null ? p.step : ''),
       name: p.name||'', ans: p.ans||'', ms: p.ms||0,
       ref: document.referrer||'', ua: navigator.userAgent, url: location.href,
-      event_id: p.event_id || uid(), fbp: cookie('_fbp'), fbc: cookie('_fbc'), ab: ''
+      event_id: p.event_id || uid(), fbp: cookie('_fbp')||FBP, fbc: cookie('_fbc')||FBC, ab: AB
     };
     backup(e);
     if(!GAS || /COLE_AQUI/.test(GAS)) return;   // ainda sem backend: só backup local
@@ -32,8 +73,7 @@
 
   /* dispara evento padrão da Meta (Pixel) SE ele estiver carregado na página.
      eid = MESMO event_id enviado ao backend → a CAPI (server) manda o mesmo id
-     e a Meta deduplica navegador+servidor em vez de contar em dobro.
-     (Sem pixel do Rasga Xana por enquanto — fica inerte até o fbq existir.) */
+     e a Meta deduplica navegador+servidor em vez de contar em dobro. */
   function fbTrack(ev, p, eid){ if(window.fbq){ try{ fbq('track', ev, p||{}, eid?{eventID:eid}:undefined); }catch(x){} } }
 
   /* ---- UTMs: captura na entrada, persiste e repassa pelo funil ---- */
@@ -54,14 +94,17 @@
   function utmAppend(url){ var qs=utmQS(); if(!qs||!url) return url; var hash='',h=url.indexOf('#'); if(h>-1){ hash=url.slice(h); url=url.slice(0,h); } url += (url.indexOf('?')>-1?'&':'?')+qs; return url+hash; }
   window.rxUtm = { get:function(){ return _utms; }, qs:utmQS, append:utmAppend };
 
-  window.rxCheckout = { url: CHECKOUT, value: PRICE };
+  /* url/value refletem a variante sorteada; a PV lê rxCheckout.url pra injetar nos CTAs. */
+  window.rxCheckout = { url: checkoutUrl(), value: checkoutPrice(), ab: AB };
 
+  var _viewed = {};  // dedup de view por CARREGAMENTO de página (não persiste — cada nova visita reconta)
   window.rxTrack = {
-    view:     function(step){ if(seen('v'+step)) return; var eid=uid(); send('view', {step:step, event_id:eid});
+    getAb:    function(){ return AB; },
+    view:     function(step){ var vk='v'+step; if(_viewed[vk]) return; _viewed[vk]=1; var eid=uid(); send('view', {step:step, event_id:eid});
                  if(String(step)==='diagnostico') fbTrack('Lead', null, eid);            // concluiu o quiz
                  else if(String(step)==='pv')      fbTrack('ViewContent', null, eid); }, // abriu a página de vendas
     answer:   function(step,text,ms){ send('answer', {step:step, ans:text, ms:ms}); },
     click:    function(step,label,ms){ send('click', {step:step, name:label||'Botão', ms:ms}); },
-    checkout: function(label){ var eid=uid(); send('checkout_click', {name:label||'CTA', event_id:eid}); fbTrack('InitiateCheckout', {value:PRICE, currency:'BRL'}, eid); }
+    checkout: function(label){ var eid=uid(); send('checkout_click', {name:label||'CTA', event_id:eid}); fbTrack('InitiateCheckout', {value:checkoutPrice(), currency:'BRL'}, eid); }
   };
 })();

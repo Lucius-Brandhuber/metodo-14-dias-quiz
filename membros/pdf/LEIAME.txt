@@ -1,0 +1,9 @@
+Coloque aqui os PDFs do produto com estes nomes exatos:
+
+  metodo.pdf   -> Método Rasga Xana (plano completo)
+  bonus1.pdf   -> Bônus 1 — Protocolo Primeira Noite
+  bonus2.pdf   -> Bônus 2 — Reset Masculino em 7 Dias
+  bonus3.pdf   -> Bônus 3 — O Mapa do Prazer Dela
+
+Enquanto um arquivo não existir, o card correspondente na página de acesso
+mostra "Em breve" automaticamente (não dá erro 404). É só subir o PDF depois.
