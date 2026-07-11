@@ -198,13 +198,13 @@
         {
           vimeo: "1208970174",
           ratio: 152.08,
-          name: "Juliana, 34 anos",
+          name: "Juliana, 24 anos",
           text: "Em poucas semanas ele mudou completamente — mais firme, durando muito mais. Voltei a sentir vontade toda noite."
         },
         {
           vimeo: "1208972490",
           ratio: 75,
-          name: "Camila, 29 anos",
+          name: "Camila, 26 anos",
           text: "Ele fazia os exercícios escondido e eu nem sabia. Só notei o resultado… e nossa, que diferença."
         }
       ],
