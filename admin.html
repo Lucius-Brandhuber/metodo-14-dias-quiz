@@ -297,8 +297,8 @@ const SESSK = PFX+'_admin_sess';
 // Backend de analytics (Supabase Edge Function rx-api)
 const GAS   = 'https://nyuycffqncuavzuhyofq.supabase.co/functions/v1/rx-api';
 
-const QUIZ_TOTAL = 16;       // telas do quiz (answers 1..15 + transição)
-const QUIZ_LAST  = '15';     // step da última resposta (= quiz concluído)
+const QUIZ_TOTAL = 17;       // telas do quiz (answers 1..16 + transição)
+const QUIZ_LAST  = '16';     // step da última resposta (= quiz concluído)
 const PRICE = 29.90;         // preço do produto (BRL) — fallback de valor
 const CURRENCY = 'BRL';
 const PRICE_AB = { A:29.90, B:34.90 };   // preço de cada variante do teste
@@ -991,7 +991,8 @@ const QUIZ_QS = [
   {step:'12', emoji:'📈', q:'Gráfico "até 7x" (continuar)'},
   {step:'13', emoji:'🏆', q:'Prova 84% + depoimento (continuar)'},
   {step:'14', emoji:'🫀', q:'Anatomia do assoalho pélvico (continuar)'},
-  {step:'15', emoji:'🎓', q:'Autoridade — médicos e universidades (continuar)'}
+  {step:'15', emoji:'🎓', q:'Autoridade — médicos e universidades (continuar)'},
+  {step:'16', emoji:'🎥', q:'Depoimentos em vídeo das parceiras (continuar)'}
 ];
 const isDiagView  = e=>e.ev==='view' &&String(e.step)==='diagnostico';
 const isDiagClick = e=>e.ev==='click'&&String(e.step)==='cta_pv';
