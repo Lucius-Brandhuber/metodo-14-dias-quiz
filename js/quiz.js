@@ -188,7 +188,31 @@
       btn: "Continuar"
     },
 
-    // 16 — Etapa 04: transição forte → PV (transfere o desejo, não vende)
+    // 16 — Prova social em vídeo: rostos e vozes reais (última ponte de confiança antes do CTA)
+    {
+      id: "depoimentos",
+      type: "videos",
+      title: 'A diferença que <span class="hl">elas</span> sentiram na cama',
+      sub: "Quem mais percebe a mudança é a parceira — ouça de quem viveu isso",
+      videos: [
+        {
+          vimeo: "1208970174",
+          ratio: 152.08,
+          name: "Juliana, 34 anos",
+          text: "Em poucas semanas ele mudou completamente — mais firme, durando muito mais. Voltei a sentir vontade toda noite."
+        },
+        {
+          vimeo: "1208972490",
+          ratio: 75,
+          name: "Camila, 29 anos",
+          text: "Ele fazia os exercícios escondido e eu nem sabia. Só notei o resultado… e nossa, que diferença."
+        }
+      ],
+      note: "+150.000 homens já testaram o Método Rasga Xana.",
+      btn: "Continuar"
+    },
+
+    // 17 — Etapa 04: transição forte → PV (transfere o desejo, não vende)
     {
       id: "transicao",
       type: "transition",
@@ -461,6 +485,35 @@
     document.getElementById("continueBtn").addEventListener("click", next);
   }
 
+  /* Prova social em vídeo (Vimeo) — mantém a proporção de cada vídeo */
+  function renderVideos(step) {
+    var cards = step.videos
+      .map(function (v) {
+        return (
+          '<figure class="vid-card">' +
+          '<div class="vid-embed" style="padding-top:' + v.ratio + '%">' +
+          '<iframe src="https://player.vimeo.com/video/' + v.vimeo +
+          '?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" ' +
+          'frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" ' +
+          'referrerpolicy="strict-origin-when-cross-origin" loading="lazy" title="Depoimento ' + v.name + '"></iframe>' +
+          "</div>" +
+          '<figcaption class="vid-cap">' +
+          '<div class="review__stars">★★★★★</div>' +
+          '<div class="review__name">' + v.name + "</div>" +
+          '<div class="review__text">' + v.text + "</div>" +
+          "</figcaption>" +
+          "</figure>"
+        );
+      })
+      .join("");
+    main.innerHTML =
+      head(step) +
+      '<div class="vids">' + cards + "</div>" +
+      (step.note ? '<p class="step-note vids__note">' + step.note + "</p>" : "") +
+      '<button class="btn" id="continueBtn">' + (step.btn || "Continuar") + "</button>";
+    document.getElementById("continueBtn").addEventListener("click", next);
+  }
+
   /* Etapa 04 — loading curto e transição que transfere o desejo p/ a PV */
   function renderTransition(step) {
     main.innerHTML =
@@ -516,6 +569,7 @@
     content: renderContent,
     chart: renderChart,
     comparison: renderComparison,
+    videos: renderVideos,
     transition: renderTransition
   };
 
