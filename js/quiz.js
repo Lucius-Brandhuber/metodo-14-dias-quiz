@@ -203,7 +203,7 @@
         },
         {
           vimeo: "1208972490",
-          ratio: 75,
+          ratio: 177.78,
           name: "Camila, 26 anos",
           text: "Ele fazia os exercícios escondido e eu nem sabia. Só notei o resultado… e nossa, que diferença."
         }
