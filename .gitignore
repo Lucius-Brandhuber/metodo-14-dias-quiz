@@ -2,3 +2,6 @@
 .vercel
 # PDFs do produto pago: servidos só pelo Vercel (repo é público — não versionar binário pago)
 membros/pdf/*.pdf
+
+# Config local de preview (Claude Code) — não versionar
+.claude/

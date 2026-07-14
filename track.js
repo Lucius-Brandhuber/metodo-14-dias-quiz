@@ -2,10 +2,8 @@
    Gera session id, dispara view / answer / click / checkout_click para a API e
    mantém backup local. Usa fetch no-cors + text/plain (evita preflight CORS).
 
-   A/B de PREÇO no checkout (2026-07-08): 50/50 por visitante (localStorage rx_price_ab).
-   A = R$29,90 · B = R$34,90. O campo `ab` vai em TODO evento e o link injetado
-   nos CTAs da PV muda conforme a variante. Cada variante é um checkout separado na
-   Payt → configurar o postback de cada um com &ab=A / &ab=B (rx-api grava em rx_vendas.ab). */
+   A/B de PREÇO ENCERRADO (2026-07-10): preço oficial único = R$34,90 (checkout B).
+   `abPick()` sempre retorna 'B'; o campo `ab='B'` segue nos eventos por continuidade. */
 (function(){
   /* Backend de analytics (Supabase Edge Function rx-api) */
   var GAS = 'https://nyuycffqncuavzuhyofq.supabase.co/functions/v1/rx-api';
@@ -14,12 +12,9 @@
   var CHECKOUT_A = 'https://checkout.payt.com.br/c/L9OX3O';   // Variante A — R$29,90
   var CHECKOUT_B = 'https://checkout.payt.com.br/c/LPV9AK';   // Variante B — R$34,90
   var PRICE_A = 29.90, PRICE_B = 34.90;
-  function abPick(){
-    var k='rx_price_ab', v;
-    try{ v=localStorage.getItem(k); }catch(x){}
-    if(v!=='A' && v!=='B'){ v = (Math.random()<0.5 ? 'A' : 'B'); try{ localStorage.setItem(k,v); }catch(x){} }
-    return v;
-  }
+  /* A/B ENCERRADO (2026-07-10): preço oficial único = R$34,90 (variante B).
+     Mantido o rótulo ab='B' nos eventos pra continuidade dos dados históricos. */
+  function abPick(){ return 'B'; }
   var AB = abPick();
   function checkoutUrl(){ return AB==='B' ? CHECKOUT_B : CHECKOUT_A; }
   function checkoutPrice(){ return AB==='B' ? PRICE_B : PRICE_A; }

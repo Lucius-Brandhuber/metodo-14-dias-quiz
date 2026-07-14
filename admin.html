@@ -297,8 +297,8 @@ const SESSK = PFX+'_admin_sess';
 // Backend de analytics (Supabase Edge Function rx-api)
 const GAS   = 'https://nyuycffqncuavzuhyofq.supabase.co/functions/v1/rx-api';
 
-const QUIZ_TOTAL = 17;       // telas do quiz (answers 1..16 + transição)
-const QUIZ_LAST  = '16';     // step da última resposta (= quiz concluído)
+const QUIZ_TOTAL = 16;       // telas do quiz (answers 1..15 + transição)
+const QUIZ_LAST  = '15';     // step da última resposta (= quiz concluído)
 const PRICE = 29.90;         // preço do produto (BRL) — fallback de valor
 const CURRENCY = 'BRL';
 const PRICE_AB = { A:29.90, B:34.90 };   // preço de cada variante do teste
@@ -538,19 +538,10 @@ function init(){
   startAutoSync();
 }
 
-/* Auto-atualização em segundo plano — mantém o painel vivo sem clicar em "Atualizar".
-   Usa sync(false) (cache-friendly no GAS), pausa quando a aba está oculta e
-   dispara na hora ao voltar pra aba. */
-let _autoTimer=null, _visBound=false;
-const AUTO_MS=15000;
-function startAutoSync(){
-  if(_autoTimer) clearInterval(_autoTimer);
-  _autoTimer = setInterval(()=>{ if(!document.hidden) sync(false); }, AUTO_MS);
-  if(!_visBound){
-    _visBound=true;
-    document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) sync(false); });
-  }
-}
+/* Auto-atualização DESLIGADA (2026-07-10, a pedido do usuário): o painel não
+   recarrega mais sozinho. Atualização é só manual pelo botão "↻ Atualizar". */
+let _autoTimer=null;
+function startAutoSync(){ /* no-op — sem reload automático */ }
 
 function localBackup(){
   try{ return (JSON.parse(localStorage.getItem(KEY)||'[]')||[]).map(norm); }catch(e){ return []; }
@@ -799,7 +790,7 @@ function renderTab(){
 }
 
 /* ====================== FUNIL (etapas clicáveis + drill-down) ====================== */
-/* Passos do funil = cada etapa do quiz (P1…P16) + diagnóstico + PV + checkout.
+/* Passos do funil = cada etapa do quiz (P1…P15) + diagnóstico + PV + checkout.
    Montado a partir de QUIZ_QS (definido mais abaixo) → 1 passo por pergunta. */
 let _FUNIL_STEPS = null;
 function funilSteps(){
@@ -991,8 +982,7 @@ const QUIZ_QS = [
   {step:'12', emoji:'📈', q:'Gráfico "até 7x" (continuar)'},
   {step:'13', emoji:'🏆', q:'Prova 84% + depoimento (continuar)'},
   {step:'14', emoji:'🫀', q:'Anatomia do assoalho pélvico (continuar)'},
-  {step:'15', emoji:'🎓', q:'Autoridade — médicos e universidades (continuar)'},
-  {step:'16', emoji:'🎥', q:'Depoimentos em vídeo das parceiras (continuar)'}
+  {step:'15', emoji:'🎓', q:'Autoridade — médicos e universidades (continuar)'}
 ];
 const isDiagView  = e=>e.ev==='view' &&String(e.step)==='diagnostico';
 const isDiagClick = e=>e.ev==='click'&&String(e.step)==='cta_pv';
@@ -1062,7 +1052,9 @@ function tabQuiz(){
   const lr=[{emoji:'🏠', label:'Abriu o quiz (visitante)', saw:S.vis, adv:S.start, keep:null}];
   let prevAns=S.vis;
   QUIZ_QS.forEach(q=>{
-    const saw=uViews(q.step), ans=uAnswers(q.step);
+    const ans=uAnswers(q.step);
+    // "Viram" = view da tela; se ainda não há view por etapa (dados antigos), usa quem chegou (respondeu a anterior)
+    const saw=uViews(q.step) || prevAns;
     lr.push({emoji:q.emoji, label:'Pergunta '+q.step+' — '+q.q, saw, adv:ans, keep:pct(ans,prevAns)});
     prevAns=ans;
   });
@@ -1144,8 +1136,9 @@ function tabQuiz(){
     || '<tr><td colspan="6"><div class="empty">Sem dados no período.</div></td></tr>';
 
   /* ---- cards de distribuição de respostas ---- */
-  const qCards=QUIZ_QS.map(q=>{
-    const saw=uViews(q.step), dist=quizDist(q.step);
+  const qCards=QUIZ_QS.map((q,i)=>{
+    const dist=quizDist(q.step);
+    const saw=uViews(q.step) || (i===0 ? S.vis : uAnswers(QUIZ_QS[i-1].step));
     const tot=Object.values(dist).reduce((a,b)=>a+b,0);
     const t=quizMs(q.step);
     return `<div class="card"><h2>${q.emoji} Pergunta ${q.step} <span class="badge">${fmt(tot)} respostas</span></h2>
